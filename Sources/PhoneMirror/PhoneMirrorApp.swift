@@ -157,6 +157,13 @@ struct MenuContent: View {
 
         Divider()
 
+        // The app never goes online by itself, so it can't know about a newer version. This opens
+        // the download page in the browser, where the newest version number is shown.
+        Text("Phone Mirror \(AppState.appVersion)")
+        Button("Check for Updates…") { state.openDownloadPage() }
+
+        Divider()
+
         Button("Quit Phone Mirror") { NSApp.terminate(nil) }
             .keyboardShortcut("q")
     }

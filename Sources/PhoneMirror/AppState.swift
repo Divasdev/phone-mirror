@@ -466,6 +466,17 @@ final class AppState: ObservableObject {
         FilesWindowController.shared.show()
     }
 
+    /// The version of this copy of the app, e.g. "1.3.1" (from Info.plist).
+    static let appVersion = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "?"
+    /// Where the newest version can be downloaded.
+    static let downloadPage = URL(string: "https://www.phonemirror.in/download/")!
+
+    /// Opens the website's download page in the browser. The app itself still makes no internet
+    /// request; updating is done by hand: download, drag to Applications, Replace.
+    func openDownloadPage() {
+        NSWorkspace.shared.open(Self.downloadPage)
+    }
+
     /// Opens the "Getting Started" window (engine, USB debugging, cable).
     func showSetup() {
         SetupWindowController.shared.show()

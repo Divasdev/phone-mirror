@@ -48,8 +48,13 @@ phone in your bag, connect wirelessly first (**Go Wireless** or **Hotspot Mode**
   is changed for this.
 - When you stop mirroring, or the connection drops, the phone **locks itself**. It is never left lit and
   unlocked in your bag.
-- **Don't press the phone's power button** while mirroring: that really puts it to sleep. If it happens,
-  right-click in the mirror window to wake it and type your PIN on the Mac's keyboard.
+- The phone's **power button** really puts the phone to sleep, and a sleeping phone draws nothing, so the
+  mirror stands still. In Pocket mode the app asks the phone every three seconds whether it is still awake,
+  and when it was put to sleep, starts the mirror again: the phone wakes with its screen still dark and
+  shows the lock screen, and you type your PIN on the Mac's keyboard. (Built on 2026-10-13, not yet
+  confirmed on a real phone. Without Pocket mode: right-click in the mirror window to wake the phone.)
+- Ticking or unticking Pocket mode while the phone is being mirrored starts the mirror again, so the change
+  applies at once.
 - Phone locked and still in the bag? If the wireless connection is still on, **Mirror Phone** wakes it; unlock
   with the PIN from the Mac. (Fingerprint and face unlock need the phone itself.)
 - It uses the phone's battery (the phone is awake and sending video) and the phone can get warm in a closed
@@ -81,7 +86,8 @@ Tick **Receive with Quick Share** in the menu. The line under it shows the name 
 On the phone: **Share → Quick Share →** your Mac. A small card appears in the top-right corner of the Mac's
 screen; click **Accept** and the file is saved in Downloads.
 
-- Phone and Mac must be on the **same Wi-Fi** (or the Mac on the phone's hotspot). A guest network keeps
+- Phone and Mac must be on the **same Wi-Fi**. The phone's own hotspot is not enough (a first user tried,
+  2026-10-13: the Mac did not show up). A guest network keeps
   devices apart, so it won't work there.
 - It needs nothing on the phone: no USB debugging, no cable, and it works with a phone that has never been
   plugged in.
@@ -220,6 +226,15 @@ has no analytics of any kind.
 The download (`public/download/Phone-Mirror.dmg`) is part of that folder, because it can only be built
 on a Mac. After a new version of the app: `./release.sh`, then `Scripts/publish_site.sh`, then commit
 and push.
+
+## Updating
+There is no updater, on purpose: the app makes no internet requests. The menu shows the version of the copy
+that is running, and **Check for Updates…** opens the website's download page in the browser, where the
+newest version number is. To update: quit Phone Mirror, download again, drag into Applications, Replace.
+Settings are kept. Because the download is not notarized, macOS asks for "Open Anyway" once more.
+
+Releasing a new version: raise `CFBundleShortVersionString` and `CFBundleVersion` in `Resources/Info.plist`,
+then `./release.sh`, `Scripts/publish_site.sh`, commit and push.
 
 ## Uninstall
 1. Menu bar icon → turn off **Launch at login** → **Quit Phone Mirror**

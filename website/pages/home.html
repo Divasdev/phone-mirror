@@ -10,7 +10,7 @@ italic: yes
 
 <section class="hero">
   <div class="wrap">
-    <a class="chip" href="#quick-share"><i></i>New in {{version}}: Quick Share to your Mac</a>
+    <a class="chip" href="#quick-share"><i></i>New: Quick Share to your Mac</a>
     <h1>Your Android phone,<br><em class="scribble">on your Mac.<svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c38-6 78-8 120-5s96 6 172-1"/></svg></em></h1>
     <p class="lead"><span class="ink">A small menu bar app.</span> One click and your phone is in a window. Type on it, drag files across, and leave the phone in your pocket.</p>
     <div class="cta">
@@ -229,6 +229,10 @@ italic: yes
       <details><summary>Is it safe to turn on USB debugging?</summary><p>USB debugging lets a computer you have approved control the phone, which is how Phone Mirror works. Only tap Allow for your own Mac. The <a href="/security/#debugging">security page</a> has the details and how to switch it off again.</p></details>
       <details><summary>Is there iPhone Mirroring for Android?</summary><p>Apple's iPhone Mirroring only works with an iPhone. Phone Mirror is what I built to get the same idea with an Android phone: its screen in a window on the Mac, the Mac's keyboard and pointer to control it, and the phone left in your pocket.</p></details>
       <details><summary>iPhone, Intel Mac or Windows?</summary><p>No. Phone Mirror is for Android phones and Macs with Apple Silicon. iPhones have Apple's own iPhone Mirroring.</p></details>
+      <details><summary>Why is a screen black in the mirror?</summary><p>Android hides some screens from every kind of screen capture: app locks, password fields and payment screens in banking apps. Phone Mirror gets a black picture for those and cannot change that. The mouse and keyboard still reach the phone, so you can often type the PIN on the Mac without seeing it; otherwise do that one step on the phone.</p></details>
+      <details><summary>Why does Return start a new line instead of sending my message?</summary><p>The phone treats the Mac's Return key like the Return key of any keyboard, and most chat apps then start a new line. Many have a setting for it. In WhatsApp it is Settings → Chats → “Enter is send”; in Telegram it is Settings → Chat Settings → “Send with Enter”.</p></details>
+      <details><summary>Why does the picture go soft for a moment when I swipe?</summary><p>The phone squeezes its screen into video before sending it. When everything moves at once, as in a swipe between home screens, it has to drop detail for an instant, and the picture sharpens again as soon as it settles.</p></details>
+      <details><summary>How do I get a newer version?</summary><p>Phone Mirror never goes online, so it does not update itself. Choose <b>Check for Updates…</b> in its menu, or open the <a href="/download/#update">download page</a>: if the version there is higher than the one at the bottom of your menu, download it and drag it into Applications, choosing Replace. Your settings stay.</p></details>
       <details><summary>Something isn't working. Who do I ask?</summary><p>Write to <a href="mailto:contact@phonemirror.in">contact@phonemirror.in</a>. Say which phone you have and what the first line of the menu says. The <a href="/setup/#fixes">quick fixes</a> cover the usual problems.</p></details>
     </div>
   </div>

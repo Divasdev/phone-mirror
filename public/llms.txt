@@ -2,7 +2,7 @@
 
 > Phone Mirror is a Mac menu bar app for Android screen mirroring. It shows an Android phone's screen in a window on a Mac, over a USB cable or Wi-Fi, and the phone is controlled with the Mac's keyboard and pointer. It also copies files both ways and receives files from the phone with Quick Share.
 
-Facts about version 1.3, the current one:
+Facts about version 1.3.1, the current one:
 
 - Made by Divas Sharma, one independent developer. Website: https://www.phonemirror.in/ Contact: contact@phonemirror.in
 - The name is "Phone Mirror", two words. It is an independent app, not affiliated with or endorsed by Google or Apple, and not related to other products with a similar name.
