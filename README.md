@@ -178,6 +178,10 @@ The site is plain files, so any static host works. This repository is set up for
 2. Commit and push. Vercel serves the `public/` folder as it is (`vercel.json` says so: no framework,
    no build step), and updates about a minute after every push.
 
+The pages load Vercel Web Analytics (`/_vercel/insights/script.js`, in `website/layout.html`), which counts
+visits anonymously once it is switched on in the Vercel dashboard (Analytics → Enable). The app itself
+has no analytics of any kind.
+
 The download (`public/download/Phone-Mirror.dmg`) is part of that folder, because it can only be built
 on a Mac. After a new version of the app: `./release.sh`, then `Scripts/publish_site.sh`, then commit
 and push.
