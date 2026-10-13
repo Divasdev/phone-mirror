@@ -77,6 +77,28 @@ struct ADB {
         return .usb
     }
 
+    // MARK: Awake or asleep
+
+    /// Is the phone awake? false after its power button was pressed (Android calls that "Asleep"
+    /// or "Dozing"); nil if the phone gave no answer. Read-only. The question is one fixed line
+    /// that the phone's own shell runs: the full report is about 200 KB, the answer is one word.
+    func isAwake(serial: String) async -> Bool? {
+        guard Validation.isSafeSerial(serial) else { return nil }
+        let result = await run(["-s", serial, "shell", "dumpsys power | grep -m 1 mWakefulness="], timeout: 6)
+        return ADB.parseAwake(result.stdout)
+    }
+
+    /// Reads "  mWakefulness=Awake" (or Asleep, Dozing, Dreaming).
+    static func parseAwake(_ text: String) -> Bool? {
+        guard let range = text.range(of: "mWakefulness=") else { return nil }
+        let word = text[range.upperBound...].prefix { $0.isLetter }
+        switch word {
+        case "Awake", "Dreaming": return true      // "Dreaming" is the screen saver: still on
+        case "Asleep", "Dozing":  return false
+        default:                   return nil
+        }
+    }
+
     // MARK: Wireless
 
     /// `adb connect ip:port` — only after the IP and port pass validation.

@@ -40,7 +40,14 @@ final class AppState: ObservableObject {
             if preset.turnsAudioOff { audio = false } // Wi-Fi presets are --no-audio
         }
     }
-    @Published var pocketMode: Bool    { didSet { defaults.set(pocketMode, forKey: "pocketMode") } }
+    @Published var pocketMode: Bool {
+        didSet {
+            defaults.set(pocketMode, forKey: "pocketMode")
+            // Ticked or unticked while the phone is being mirrored: start the mirror again, so it
+            // takes effect now and not only the next time.
+            if isMirroring, pocketMode != mirroringInPocketMode { restartMirror() }
+        }
+    }
     @Published var stayAwake: Bool     { didSet { defaults.set(stayAwake, forKey: "stayAwake") } }
     @Published var realKeyboard: Bool  { didSet { defaults.set(realKeyboard, forKey: "realKeyboard") } }
     @Published var audio: Bool         { didSet { defaults.set(audio, forKey: "audio") } }
@@ -94,6 +101,12 @@ final class AppState: ObservableObject {
     var qualityCheck: (link: ConnectionQuality.Link, task: Task<ConnectionQuality, Never>)?
     /// What the running mirror was started with (used for the automatic retry).
     private var currentLaunch: (settings: StreamSettings, target: Device, usedTweaks: Bool, startedAt: Date)?
+    /// Set while the app itself is starting the mirror again: what to start once the old one has ended.
+    private var relaunchAfterStop: (settings: StreamSettings, target: Device)?
+    /// Watches the phone while it is mirrored in Pocket mode (see `startPocketGuard`).
+    private var pocketGuard: Task<Void, Never>?
+    /// When the phone was woken again after its power button was pressed in Pocket mode.
+    private var pocketWakeUps: [Date] = []
 
     /// True the very first time the app runs on this Mac (nothing saved yet).
     private let isFirstLaunch: Bool
@@ -355,6 +368,7 @@ final class AppState: ObservableObject {
             mirroringLabel = settings.label + (safeMode && settings.usesEncoderTweaks(hardwareEncoder: nil) ? " – basic mode" : "")
             lastError = nil
             currentLaunch = (settings, target, !safeMode && settings.usesEncoderTweaks(hardwareEncoder: encoder), Date())
+            startPocketGuard(for: target)
         } catch {
             show(FriendlyError(title: "Couldn't start scrcpy.",
                                advice: "Try reinstalling it with: brew reinstall scrcpy",
@@ -370,6 +384,15 @@ final class AppState: ObservableObject {
         fps = nil
         let launched = currentLaunch
         currentLaunch = nil
+        pocketGuard?.cancel()
+        pocketGuard = nil
+
+        // The app stopped this mirror itself in order to start it again (see `restartMirror`).
+        if let again = relaunchAfterStop {
+            relaunchAfterStop = nil
+            Task { await launch(again.settings, on: again.target, safeMode: encoderTweaksRejected.contains(encoderKey(again.target))) }
+            return
+        }
 
         // Exit code 0 = you closed the window. Anything else is a problem.
         if !stoppedByUser && exitCode != 0 {
@@ -388,7 +411,52 @@ final class AppState: ObservableObject {
     }
 
     func stopMirroring() {
+        relaunchAfterStop = nil
         scrcpy.stop()
+    }
+
+    /// Stops the running mirror and starts it again with the same preset and the options as they
+    /// are now. The window closes and comes back about two seconds later.
+    func restartMirror() {
+        guard isMirroring, let launched = currentLaunch else { return }
+        relaunchAfterStop = (launched.settings, launched.target)
+        scrcpy.stop()
+    }
+
+    // MARK: Pocket mode: the phone's own power button
+
+    /// In Pocket mode the phone's screen is dark but the phone is awake. Its power button really
+    /// puts it to sleep: nothing is drawn any more, so the mirror stands still. That is how Android
+    /// works and can't be switched off. So while a Pocket mode mirror runs, the app asks the phone
+    /// every few seconds whether it is still awake (one short read-only question), and when it has
+    /// been put to sleep, starts the mirror again: starting wakes the phone and darkens its screen,
+    /// and the mirror shows the lock screen, ready for the PIN from the Mac's keyboard.
+    private func startPocketGuard(for target: Device) {
+        pocketGuard?.cancel()
+        pocketGuard = nil
+        guard mirroringInPocketMode, let adb else { return }
+        pocketGuard = Task { [weak self] in
+            // A new mirror needs a moment: scrcpy is still waking the phone and darkening it.
+            try? await Task.sleep(for: .seconds(8))
+            while !Task.isCancelled {
+                try? await Task.sleep(for: .seconds(3))
+                guard let self, !Task.isCancelled, self.isMirroring, self.mirroringInPocketMode else { return }
+                let awake = await adb.isAwake(serial: target.serial)
+                guard !Task.isCancelled else { return }
+                if awake == false {
+                    self.phoneWasPutToSleepInPocketMode()
+                    return
+                }
+            }
+        }
+    }
+
+    private func phoneWasPutToSleepInPocketMode() {
+        // Three times in two minutes means somebody wants this phone asleep: leave it alone.
+        let now = Date()
+        pocketWakeUps = pocketWakeUps.filter { now.timeIntervalSince($0) < 120 } + [now]
+        guard pocketWakeUps.count <= 3 else { return }
+        restartMirror()
     }
 
     // MARK: Files

@@ -295,6 +295,17 @@ private struct Unchecked<Value>: @unchecked Sendable {
 
 // MARK: - Settings
 
+@Test func thePhonesSleepStateIsRead() {
+    // The one line the phone answers with, as seen on a POCO X4 Pro (Android 13).
+    #expect(ADB.parseAwake("  mWakefulness=Awake\n") == true)
+    #expect(ADB.parseAwake("  mWakefulness=Dozing\n") == false)     // after the power button
+    #expect(ADB.parseAwake("mWakefulness=Asleep") == false)
+    #expect(ADB.parseAwake("  mWakefulness=Dreaming") == true)
+    #expect(ADB.parseAwake("") == nil)                               // no answer: don't guess
+    #expect(ADB.parseAwake("error: device offline") == nil)
+    #expect(ADB.parseAwake("mWakefulness=Something new") == nil)
+}
+
 @Test func aBlockedLocalNetworkIsExplainedInPlainWords() {
     // What adb prints when macOS does not let it reach the phone's address on the Wi-Fi.
     #expect(FriendlyError.looksBlockedByMacOS("failed to connect to '192.168.0.10:5555': No route to host"))
