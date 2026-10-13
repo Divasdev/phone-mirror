@@ -361,3 +361,17 @@ python3 Tools/latency_bench.py -s <serial or ip:5555> --only cbr4,cbr4_800 --rep
 - **Wireless debugging lets anyone on the same network try to connect to your phone.** Use it only on your
   home Wi-Fi or your own hotspot and click **Disconnect Wireless** when done (or keep "Auto-disable wireless when
   I quit" on). If connecting fails, the app switches wireless debugging back off.
+
+## Licence
+Phone Mirror's own code and its website are released under the MIT License: see `LICENSE`.
+Copyright (c) 2026 Divas Sharma.
+
+That licence does not cover the things in this repository that other people made. They keep their own:
+- **scrcpy** and **adb**, which are inside the download (`public/download/Phone-Mirror.dmg`): Apache License
+  2.0. Their notices are in `Resources/THIRD-PARTY-NOTICES.txt` and inside the app.
+- The **Instrument Serif** font used by the website: SIL Open Font License
+  (`website/static/assets/fonts/OFL.txt`).
+- The **music and sound effect in the launch film** (`film-720p.mp4`): from Mixkit, under Mixkit's free
+  licences, which allow using them in a video but not sharing them on their own.
+- Android and Quick Share are trademarks of Google LLC; Mac and macOS are trademarks of Apple Inc.
+
