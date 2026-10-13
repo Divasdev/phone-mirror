@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{site_url}}{{path}}">
+<meta property="og:site_name" content="Phone Mirror">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{site_url}}{{path}}">
+<meta property="og:image" content="{{site_url}}/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f6f5f1">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+{{head}}<style>{{css}}</style>
+</head>
+<body class="page-{{nav}}">
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="/"><img src="/assets/icon-72.png" alt="" width="36" height="36"><span>Phone Mirror</span></a>
+    <nav aria-label="Main">
+      <a href="/#features" data-nav="home">Features</a>
+      <a href="/setup/" data-nav="setup">Set up</a>
+      <a href="/security/" data-nav="security">Security</a>
+    </nav>
+    <a class="btn small" href="/download/">Download</a>
+  </div>
+</header>
+
+<main id="main">
+{{content}}
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/download/">Download</a>
+      <a href="/setup/">Set up your phone</a>
+      <a href="/security/">Privacy and security</a>
+      <a href="mailto:contactphonemirror@gmail.com">Contact</a>
+    </div>
+    <div class="legal">
+      <div>Made by Divas Sharma. © {{year}} · phonemirror.in · version {{version}} · <a href="mailto:contactphonemirror@gmail.com">contactphonemirror@gmail.com</a></div>
+      <div>Phone Mirror runs on <a href="https://github.com/Genymobile/scrcpy" rel="noopener">scrcpy</a> by Genymobile and adb from the Android Open Source Project, both under the Apache License 2.0. Their notices are inside the app.</div>
+      <div>Android and Quick Share are trademarks of Google LLC. Mac and macOS are trademarks of Apple Inc. Phone Mirror is an independent app, not affiliated with or endorsed by either company.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js?v={{build}}" defer></script>
+</body>
+</html>

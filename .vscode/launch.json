@@ -1,0 +1,24 @@
+{
+   "configurations": [
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:PhoneMirror}",
+         "name": "Debug PhoneMirror",
+         "target": "PhoneMirror",
+         "configuration": "debug",
+         "preLaunchTask": "swift: Build Debug PhoneMirror"
+      },
+      {
+         "type": "swift",
+         "request": "launch",
+         "args": [],
+         "cwd": "${workspaceFolder:PhoneMirror}",
+         "name": "Release PhoneMirror",
+         "target": "PhoneMirror",
+         "configuration": "release",
+         "preLaunchTask": "swift: Build Release PhoneMirror"
+      }
+   ]
+}

@@ -1,0 +1,116 @@
+<!--
+title: Privacy and security in Phone Mirror
+description: What Phone Mirror does and never does, why macOS warns you when you first open it, how to check your download, and what USB debugging and Quick Share mean for your privacy.
+path: /security/
+nav: security
+-->
+
+<section class="pagehead">
+  <div class="wrap mid">
+    <h1>Privacy and security</h1>
+    <p class="lead">What Phone Mirror does, what it never does, and how to check for yourself.</p>
+  </div>
+</section>
+
+<section class="tight tinted" style="padding-top: 0">
+  <div class="wrap mid">
+    <div class="topics">
+
+      <div class="card topic">
+        <h3>In short</h3>
+        <table class="facts">
+          <tr><th>Internet</th><td><span class="no">Never used.</span> The app makes no connections to the internet. It only talks to your phone, over the cable or your own Wi-Fi.</td></tr>
+          <tr><th>Account</th><td><span class="no">None.</span> No sign-up, no login, no email address.</td></tr>
+          <tr><th>Tracking</th><td><span class="no">None.</span> No analytics, no crash reports, no usage counting. This website has no trackers or cookies either.</td></tr>
+          <tr><th>Your screen</th><td>Goes from the phone to your Mac and is shown in a window. It is not recorded, saved or sent anywhere.</td></tr>
+          <tr><th>Saved on your Mac</th><td>Your menu choices and your phone's address on your home network, so it can reconnect. Files you accept go to your Downloads folder. Nothing else.</td></tr>
+          <tr><th>Left on your phone</th><td>Nothing. While you mirror, a small helper sits in the phone's temporary folder; it is removed when mirroring ends. No app is installed.</td></tr>
+          <tr><th>Your files</th><td>Copied only when you drag them, or when you click Accept on a Quick Share from your phone. Phone Mirror never replaces or deletes a file on either side.</td></tr>
+          <tr><th>Listening on your network</th><td>Only while you have ticked “Receive with Quick Share”, and only for devices on the same Wi-Fi. It is off until you switch it on.</td></tr>
+        </table>
+      </div>
+
+      <div class="card topic" id="warning">
+        <h3>Why macOS warns you the first time</h3>
+        <p>When you open an app from the internet, macOS checks whether Apple has examined it. Apple offers that check to developers who pay for its yearly developer programme. I make Phone Mirror on my own, and it has not been through that programme.</p>
+        <p>So macOS says it “could not verify” the app. That sentence means Apple has not looked at it. It does not mean something was found. macOS then leaves the decision to you, in System Settings → Privacy &amp; Security. The <a class="textlink" href="/download/#install">download page</a> shows the steps.</p>
+        <p>You shouldn't have to take my word for any of this, so the next part is what you can check yourself.</p>
+      </div>
+
+      <div class="card topic" id="check">
+        <h3>Check your download</h3>
+        <p>Every file has a fingerprint, a long code that changes completely if even one byte of the file changes. If the fingerprint of your download matches the one below, you have exactly the file that was published here.</p>
+        <ol>
+          <li>Open <b>Terminal</b> (press ⌘ and Space, type Terminal, press Return).</li>
+          <li>Paste this line and press Return:<br><code>shasum -a 256 ~/Downloads/Phone-Mirror.dmg</code></li>
+          <li>Compare the code it prints with this one. They must be the same from the first character to the last.</li>
+        </ol>
+        <div class="hash">
+          <div class="value"><code id="fingerprint">{{sha256}}</code><button type="button" data-copy="#fingerprint">Copy</button></div>
+        </div>
+        <p class="small">This is the fingerprint of version {{version}}.</p>
+      </div>
+
+      <div class="card topic" id="inside">
+        <h3>What is inside the app</h3>
+        <p>Phone Mirror is a small Mac app that starts two well-known programs for you and gives them a friendly menu:</p>
+        <ul>
+          <li><b>scrcpy</b>, by Genymobile. It shows and controls the phone's screen. It is open source: <a class="textlink" href="https://github.com/Genymobile/scrcpy" rel="noopener">anyone can read its code</a>.</li>
+          <li><b>adb</b>, Android's own tool for connecting a phone to a computer, from the Android Open Source Project. The copy inside the app is the one built and signed by Google.</li>
+        </ul>
+        <p>Each time it starts, Phone Mirror asks macOS to check that nothing inside the app has been swapped or edited since it was built. If that check fails, it refuses to run those two programs.</p>
+      </div>
+
+      <div class="card topic" id="debugging">
+        <h3>About USB debugging</h3>
+        <p>USB debugging is the Android setting that makes all of this possible. It is powerful, so it is worth knowing what it does.</p>
+        <ul>
+          <li>It lets a computer <b>that you have approved</b> see the screen, send clicks and keys, and copy files. A computer you have not approved gets nothing.</li>
+          <li>The phone asks you before it trusts a computer. <b>Only tap Allow for your own Mac.</b> Never for a computer you don't know, and never at a public charging point.</li>
+          <li>To take the trust back: Developer options → <b>Revoke USB debugging authorisations</b>.</li>
+          <li>When you stop using Phone Mirror for good, switch USB debugging off again.</li>
+        </ul>
+      </div>
+
+      <div class="card topic" id="wireless">
+        <h3>About wireless mode</h3>
+        <ul>
+          <li>While wireless mode is on, the phone listens for your Mac on the network it is connected to. Use it on your home Wi-Fi or your own hotspot, not on public Wi-Fi.</li>
+          <li>Phone Mirror only connects to addresses on a private home or office network. It refuses anything else.</li>
+          <li>The menu shows a warning for as long as wireless mode is on. <b>Disconnect Wireless</b> switches it off, and by default the app also switches it off when you quit.</li>
+          <li>Restarting the phone switches wireless mode off by itself.</li>
+        </ul>
+      </div>
+
+      <div class="card topic" id="quick-share">
+        <h3>About receiving with Quick Share</h3>
+        <ul>
+          <li>It is <b>off until you tick it</b> in the menu. While it is off, Phone Mirror does not listen on the network at all.</li>
+          <li>While it is on, your Mac's name is visible to devices on the same Wi-Fi, and they can ask to send you something. This is like AirDrop set to Everyone. Untick it on Wi-Fi you don't trust.</li>
+          <li>Only devices on the same local network can connect. Connections from the internet are refused.</li>
+          <li><b>Nothing is saved until you click Accept</b>, for every single share. The card shows who is sending, what, and a four-digit code. If your phone shows a code too, the two should match.</li>
+          <li>The transfer is encrypted between the phone and the Mac.</li>
+          <li>Files go to your Downloads folder. A file that is already there is never replaced, and a transfer that breaks off leaves no half file behind.</li>
+          <li>Received files are marked as downloads, so macOS checks an app or a script before it runs for the first time, the same way it does for a download from a browser.</li>
+        </ul>
+      </div>
+
+      <div class="card topic" id="permissions">
+        <h3>What macOS may ask you</h3>
+        <p>Phone Mirror does not need screen recording, accessibility, camera or microphone access, and never asks for them. You may see these questions, each only when you use that feature:</p>
+        <ul>
+          <li><b>Find devices on your local network</b>: when you go wireless or switch on Quick Share. That is how the Mac and the phone reach each other.</li>
+          <li><b>Accept incoming network connections</b>: only if your Mac's firewall is on and you switch on Quick Share.</li>
+          <li><b>Access your Desktop, Documents or Downloads folder</b>: when you copy a file to or from one of them.</li>
+          <li><b>Open at login</b>: if you turn on “Launch at login” in the menu.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="card next">
+      <div><h3>Ready?</h3><p>The download is {{size}}.</p></div>
+      <a class="btn" href="/download/">{{apple}}Download for Mac</a>
+    </div>
+  </div>
+</section>

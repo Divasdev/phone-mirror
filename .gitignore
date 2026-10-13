@@ -1,0 +1,20 @@
+# Build output
+.build/
+build/
+dist/
+*.app
+*.dmg
+# ...except the finished website, which the web host serves straight from this repository
+# (made by Scripts/publish_site.sh), with the download in it
+!public/download/Phone-Mirror.dmg
+
+# The downloaded engine (fetched again by Scripts/fetch_engine.sh)
+Vendor/
+
+# macOS and editors
+.DS_Store
+.swiftpm/
+xcuserdata/
+
+# Working notes for the AI assistant: kept on this Mac, not published
+CLAUDE.md

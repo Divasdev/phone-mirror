@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://phonemirror.in/sitemap.xml

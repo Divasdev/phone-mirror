@@ -1,0 +1,230 @@
+<!--
+title: Phone Mirror: your Android phone on your Mac
+description: A small Mac menu bar app that puts your Android phone in a window. Type on it, drag files both ways, receive files with Quick Share, and leave the phone in your pocket. No account, no tracking.
+path: /
+nav: home
+lcp: /assets/video/hero-loop-poster.webp
+italic: yes
+-->
+
+<section class="hero">
+  <div class="wrap">
+    <a class="chip" href="#quick-share"><i></i>New in {{version}}: Quick Share to your Mac</a>
+    <h1>Your Android phone,<br><em class="scribble">on your Mac.<svg viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true"><path d="M4 9c38-6 78-8 120-5s96 6 172-1"/></svg></em></h1>
+    <p class="lead"><span class="ink">A small menu bar app.</span> One click and your phone is in a window. Type on it, drag files across, and leave the phone in your pocket.</p>
+    <div class="cta">
+      <a class="btn big" href="{{download}}" download data-then="/download/#install">
+        {{apple}}
+        Download for Mac
+      </a>
+      <a class="plainlink" href="#how">or see how it works ↓</a>
+    </div>
+    <p class="fine">{{size}} · macOS 14 or later · Apple Silicon</p>
+
+    <div class="stagebox glass">
+      <div class="jot one" aria-hidden="true">your phone,<br>live on the Mac
+        <svg viewBox="0 0 96 48"><path d="M4 8c30-5 60 6 86 30"/><path d="M76 33l14 5 1-15"/></svg>
+      </div>
+      <div class="jot two" aria-hidden="true">screen off,<br>in your pocket
+        <svg viewBox="0 0 96 48"><path d="M92 8C62 3 32 14 6 38"/><path d="M20 33L6 38 5 23"/></svg>
+      </div>
+
+      <!-- The demo. A short silent loop plays by itself; the sound button swaps in the full film with music. -->
+      <div class="demo" data-demo>
+        <video class="demo-loop" muted loop playsinline preload="none" poster="/assets/video/hero-loop-poster.webp" width="1600" height="900"
+               aria-label="A Mac window showing an Android phone's screen. The pointer taps and types in the window and the phone follows. Then the phone goes dark and drops into a pocket while the window keeps working.">
+          <source src="/assets/video/hero-loop.webm" type="video/webm">
+          <source src="/assets/video/hero-loop.mp4" type="video/mp4">
+        </video>
+        <video class="demo-film" playsinline preload="none" data-poster="/assets/video/film-poster.jpg" width="1280" height="720" hidden
+               aria-label="The Phone Mirror launch film, 63 seconds, with music.">
+          <source src="/assets/video/film-720p.mp4" type="video/mp4">
+          <track kind="captions" src="/assets/video/film-captions.vtt" srclang="en" label="English">
+        </video>
+        <button type="button" class="demo-btn demo-pause" aria-label="Pause the video">
+          <svg class="i-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>
+          <svg class="i-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.2v13.6a.8.8 0 0 0 1.2.7l11-6.8a.8.8 0 0 0 0-1.4l-11-6.8A.8.8 0 0 0 8 5.2z"/></svg>
+        </button>
+        <button type="button" class="demo-btn demo-sound" aria-pressed="false">
+          <svg class="i-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3l4.5-4v13l-4.5-4H4z" fill="currentColor"/><path d="M16 9.5l5 5m0-5l-5 5"/></svg>
+          <svg class="i-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9.5h3l4.5-4v13l-4.5-4H4z" fill="currentColor"/><path d="M15.5 9a4.2 4.2 0 0 1 0 6M18.3 6.5a8 8 0 0 1 0 11"/></svg>
+          <span>Play with sound</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap">
+    <div class="letter glass">
+      <p>Hi, I'm Divas. I have a MacBook and an Android phone, and I wanted iPhone Mirroring for my phone. Apple wasn't going to build that, so I made Phone Mirror.</p>
+      <p>It is a friendly menu on top of <a href="https://github.com/Genymobile/scrcpy" rel="noopener">scrcpy</a>, the open-source tool that does the heavy lifting. There is no account, and it never goes online.</p>
+      <p class="sign">Divas</p>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="tight tinted">
+  <div class="wrap">
+    <div class="center">
+      <h2>What it does</h2>
+      <p class="sub">Short list. Everything here is in the app today.</p>
+    </div>
+
+    <div class="bento">
+      <div class="tile card span6 side" id="quick-share">
+        <div>
+          <h3>Quick Share to your Mac <span class="new">New</span></h3>
+          <p>On the phone, tap Share, then Quick Share, and pick your Mac. Click <b>Accept</b> and the file is in your Downloads folder.</p>
+          <p>No cable, no USB debugging, nothing to install on the phone. Both only have to be on the same Wi-Fi.</p>
+        </div>
+        <div class="art">
+          <picture>
+            <source srcset="/assets/quick-share.webp" type="image/webp">
+            <img class="shot card-shot" src="/assets/quick-share.png" width="880" height="396" loading="lazy" decoding="async"
+                 alt="A small Quick Share card on the Mac: “Pixel 8” wants to send you 3 files, with a code to compare and the buttons Decline and Accept.">
+          </picture>
+        </div>
+      </div>
+
+      <div class="tile card span4">
+        <h3>One click and you're in</h3>
+        <p>It lives in the menu bar. Click <b>Mirror Phone</b> and the phone opens in a window. Works over a cable or Wi-Fi, and it remembers your phone next time.</p>
+        <div class="art">
+          <div class="menu" role="img" aria-label="The Phone Mirror menu: Connected via USB, Mirror Phone, Stop Mirroring, Phone Files, Go Wireless, Hotspot Mode, Receive with Quick Share, Pocket mode.">
+            <div class="dim">Connected via USB</div>
+            <hr>
+            <div class="on"><span>Mirror Phone</span><kbd>⌘M</kbd></div>
+            <div class="dim">Stop Mirroring</div>
+            <div><span>Phone Files (drag &amp; drop)…</span><kbd>⌘F</kbd></div>
+            <hr>
+            <div>Go Wireless (home Wi-Fi)</div>
+            <div><span>Hotspot Mode (direct link)</span><kbd>›</kbd></div>
+            <hr>
+            <div>✓&nbsp; Receive with Quick Share</div>
+            <hr>
+            <div>✓&nbsp; Pocket mode</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile card span2">
+        <h3>Pocket mode</h3>
+        <p>The phone's own screen goes dark and it stays awake. When you stop, it locks itself.</p>
+        <div class="art">
+          <div class="miniphone" role="img" aria-label="A phone with its screen switched off."><div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>
+          </div></div>
+        </div>
+      </div>
+
+      <div class="tile card span6 side">
+        <div>
+          <h3>Files, both ways</h3>
+          <p>Drag a file from Finder to send it to the phone. Drag one out to keep it on the Mac. Folders too.</p>
+          <p>Nothing is ever replaced or deleted. A taken name becomes “photo (2).jpg”.</p>
+        </div>
+        <div class="art">
+          <picture>
+            <source srcset="/assets/phone-files.webp" type="image/webp">
+            <img class="shot" src="/assets/phone-files.png" width="1320" height="904" loading="lazy" decoding="async"
+                 alt="The Phone Files window listing a phone's Download folder with photos, a video, a PDF and two folders.">
+          </picture>
+        </div>
+      </div>
+
+      <div class="tile card span2">
+        <h3>Your keyboard works</h3>
+        <p>Type on the phone with the Mac's keyboard. Copy on one, paste on the other.</p>
+        <div class="art"><div class="keys" aria-hidden="true"><kbd>⌘</kbd><kbd>C</kbd><kbd>V</kbd></div></div>
+      </div>
+
+      <div class="tile card span2">
+        <h3>No cable needed</h3>
+        <p>Plug in once, then go wireless. Or join the phone's hotspot and skip the router.</p>
+        <div class="art">
+          <div class="hop" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2.5" width="10" height="19" rx="2.4"/><path d="M11 18.5h2"/></svg>
+            <svg class="waves" viewBox="0 0 54 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M2 12h50"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M1.5 19.5h21"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile card span2">
+        <h3>It tells you why it lags</h3>
+        <p>Live frame rate and connection quality, right in the menu.</p>
+        <div class="art">
+          <div class="readout" role="img" aria-label="Sample status lines: 58 frames per second, connection good, ping 4 milliseconds.">
+            <div><span>Mirroring</span>58 fps</div>
+            <div><span>Connection</span>Good · ping 4 ms</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="tight tinted">
+  <div class="wrap center">
+    <h2>Two minutes to set up</h2>
+    <p class="sub">Nothing gets installed on the phone. The app walks you through it the first time.</p>
+    <div class="strip glass">
+      <div><div class="n">01</div><h3>Download the app</h3><p>Drag Phone Mirror into Applications. Everything it needs is inside.</p></div>
+      <div><div class="n">02</div><h3>Allow USB debugging</h3><p>One switch in the phone's settings. You turn it on once.</p></div>
+      <div><div class="n">03</div><h3>Click Mirror Phone</h3><p>Plug in the cable, tap Allow on the phone, click. Go wireless after that.</p></div>
+    </div>
+    <p style="margin-top: 26px"><a class="textlink" href="/setup/">The full guide, with steps for your phone's brand</a></p>
+  </div>
+</section>
+
+<section id="privacy" class="tight">
+  <div class="wrap center">
+    <h2>It never goes online</h2>
+    <p class="sub">Your screen travels from the phone to the Mac and nowhere else.</p>
+    <div class="plain4">
+      <div><h3>No account</h3><p>No sign-up, no login, no email.</p></div>
+      <div><h3>No cloud</h3><p>Nothing is uploaded. The app makes no internet connections.</p></div>
+      <div><h3>No tracking</h3><p>No analytics in the app, none on this site.</p></div>
+      <div><h3>Open engine</h3><p>Mirroring is done by scrcpy, which anyone can read.</p></div>
+    </div>
+    <p style="margin-top: 30px"><a class="textlink" href="/security/">Everything it does and doesn't do</a></p>
+  </div>
+</section>
+
+<section id="get" class="tight">
+  <div class="wrap">
+    <div class="card download">
+      <img class="icon" src="/assets/icon-208.png" alt="" width="104" height="104" loading="lazy" decoding="async">
+      <h2>Get Phone Mirror</h2>
+      <div class="cta">
+        <a class="btn big" href="{{download}}" download data-then="/download/#install">
+          {{apple}}
+          Download for Mac
+        </a>
+      </div>
+      <div class="specs">
+        <span>Version {{version}}</span><span>{{size}}</span><span>macOS 14 or later</span><span>Apple Silicon</span>
+      </div>
+      <p class="fine">The first time you open it, macOS asks you to confirm. <a class="textlink" href="/download/#install">Here's how, in four steps.</a></p>
+    </div>
+  </div>
+</section>
+
+<section id="questions" class="tight">
+  <div class="wrap center">
+    <h2>Questions</h2>
+    <div class="faq">
+      <details><summary>Do I have to install anything on my phone?</summary><p>No. For mirroring you turn on one setting, USB debugging, and tap Allow the first time you plug the phone in. For sending files with Quick Share you change nothing on the phone at all. Nothing stays installed on it.</p></details>
+      <details><summary>How does Quick Share to the Mac work?</summary><p>Quick Share is the sharing that is already built into Android. Tick <b>Receive with Quick Share</b> in Phone Mirror's menu and your Mac shows up in the phone's Quick Share list while both are on the same Wi-Fi. Every share waits for you to click Accept on the Mac. It goes one way, from the phone to the Mac; to put files on the phone, use Phone Files. The <a href="/setup/#quick-share">setup guide</a> has the steps.</p></details>
+      <details><summary>Which phones work?</summary><p>Android phones with Android 5 or newer; sound needs Android 11 or newer. I built and tested it with a POCO X4 Pro on Android 13. Xiaomi, POCO and Redmi phones need one extra switch, and the <a href="/setup/">setup guide</a> shows where it is.</p></details>
+      <details><summary>Does it work without a cable?</summary><p>Yes. Plug the cable in once, click Go Wireless, then unplug. Phone and Mac have to be on the same Wi-Fi, or the Mac can join the phone's hotspot. After the phone restarts you plug in once more.</p></details>
+      <details><summary>Will there be lag?</summary><p>With a cable it feels close to using the phone. Over Wi-Fi it depends on your network: a 5 GHz network or Hotspot Mode is smooth, a busy 2.4 GHz router can stutter. The menu shows you the frame rate and the connection quality.</p></details>
+      <details><summary>Why does my Mac warn me when I open it?</summary><p>Apple checks apps for developers who pay for its yearly programme, and I haven't. So macOS asks you to confirm before it runs. The <a href="/download/#install">download page</a> shows the four steps, and the <a href="/security/#warning">security page</a> explains how to check the download yourself.</p></details>
+      <details><summary>Is it safe to turn on USB debugging?</summary><p>USB debugging lets a computer you have approved control the phone, which is how Phone Mirror works. Only tap Allow for your own Mac. The <a href="/security/#debugging">security page</a> has the details and how to switch it off again.</p></details>
+      <details><summary>iPhone, Intel Mac or Windows?</summary><p>No. Phone Mirror is for Android phones and Macs with Apple Silicon. iPhones have Apple's own iPhone Mirroring.</p></details>
+      <details><summary>Something isn't working. Who do I ask?</summary><p>Write to <a href="mailto:contactphonemirror@gmail.com">contactphonemirror@gmail.com</a>. Say which phone you have and what the first line of the menu says. The <a href="/setup/#fixes">quick fixes</a> cover the usual problems.</p></details>
+    </div>
+  </div>
+</section>

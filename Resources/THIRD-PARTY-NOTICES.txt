@@ -1,0 +1,30 @@
+Phone Mirror — third-party software
+
+The copy of Phone Mirror you downloaded carries two programs made by other people.
+Phone Mirror starts them for you; it does not change them.
+
+1. scrcpy
+   What it does: shows and controls the Android phone's screen.
+   Made by: Genymobile and Romain Vimont. https://github.com/Genymobile/scrcpy
+   Licence: Apache License 2.0 (full text: Engine/LICENSE-scrcpy.txt, next to this file).
+   This is the unmodified official release for Apple Silicon Macs. That build contains
+   these libraries, each under its own licence, with source code at its project page:
+     - FFmpeg   (LGPL 2.1 or later)   https://ffmpeg.org
+     - SDL      (zlib licence)        https://libsdl.org
+     - libusb   (LGPL 2.1)            https://libusb.info
+     - dav1d    (BSD 2-Clause)        https://code.videolan.org/videolan/dav1d
+   The scripts that produce the build are in the scrcpy repository (folder "release").
+
+2. adb (Android Debug Bridge)
+   What it does: carries data between the Mac and the phone.
+   Made by: the Android Open Source Project. https://android.googlesource.com/platform/packages/modules/adb
+   Licence: Apache License 2.0.
+   This is the copy that ships inside the official scrcpy release, built and signed by Google
+   (Android SDK Platform-Tools).
+
+Phone Mirror itself uses only Apple's system frameworks.
+
+Receiving files with Quick Share was written for Phone Mirror from the protocol notes of the
+NearDrop project by Grishka (https://github.com/grishka/NearDrop, released into the public
+domain) and Google's published message definitions. None of their code is included.
+Quick Share and Android are trademarks of Google LLC. Phone Mirror is not affiliated with Google.

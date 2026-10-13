@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Set up your phone for Phone Mirror</title>
+<meta name="description" content="Turn on USB debugging on your Android phone, plug it in, tap Allow, and mirror it on your Mac. Steps for Samsung, Xiaomi, POCO, Redmi, OnePlus, Oppo, Realme, Pixel and others, and how to receive files with Quick Share.">
+<link rel="canonical" href="https://phonemirror.in/setup/">
+<meta property="og:site_name" content="Phone Mirror">
+<meta property="og:title" content="Set up your phone for Phone Mirror">
+<meta property="og:description" content="Turn on USB debugging on your Android phone, plug it in, tap Allow, and mirror it on your Mac. Steps for Samsung, Xiaomi, POCO, Redmi, OnePlus, Oppo, Realme, Pixel and others, and how to receive files with Quick Share.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phonemirror.in/setup/">
+<meta property="og:image" content="https://phonemirror.in/assets/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f6f5f1">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/InstrumentSerif-Regular.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:"Instrument Serif";font-style:normal;font-weight:400;font-display:swap;src:url("/assets/fonts/InstrumentSerif-Regular.woff2") format("woff2")}@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;font-display:swap;src:url("/assets/fonts/InstrumentSerif-Italic.woff2") format("woff2")}:root{color-scheme:light;--paper:#f6f5f1;--ink:#121316;--text:#34373c;--muted:#6d7179;--line:rgba(18,19,22,.1);--green:#12a66a;--blue:#2a7cf6;--glass:rgba(255,255,255,.5);--glass-solid:rgba(255,255,255,.82);--edge:rgba(255,255,255,.85);--shadow:inset 0 1px 0 rgba(255,255,255,.95),0 0 0 1px rgba(18,19,22,.035),0 30px 60px -30px rgba(38,48,68,.32),0 2px 8px rgba(38,48,68,.05);--lift:0 34px 70px -28px rgba(38,48,68,.42),0 6px 16px rgba(38,48,68,.08);--radius:26px;--max:1040px;--hand:"Bradley Hand","Noteworthy","Marker Felt","Segoe Print",cursive;--display:"Instrument Serif",ui-serif,"New York","Iowan Old Style",Georgia,serif}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%;background:var(--paper)}body{margin:0;color:var(--text);font:17px/1.6 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}body::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(46vmax 46vmax at 6% 4%,rgba(170,240,208,.62),transparent 62%),radial-gradient(40vmax 40vmax at 96% 12%,rgba(190,218,255,.7),transparent 62%),radial-gradient(42vmax 42vmax at 88% 96%,rgba(255,219,186,.6),transparent 62%),radial-gradient(38vmax 38vmax at 2% 92%,rgba(224,214,255,.6),transparent 62%),var(--paper)}body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.28;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E")}img{max-width:100%;height:auto;display:block}a{color:inherit;text-underline-offset:3px;text-decoration-thickness:1px}h1,h2,h3{color:var(--ink);margin:0}h1,h2{font-family:var(--display);font-weight:400;letter-spacing:-.022em;line-height:1;text-wrap:balance}h1{font-size:clamp(3.2rem,8.6vw,6.6rem)}h2{font-size:clamp(2.3rem,4.8vw,3.5rem)}h1 em,h2 em{font-style:italic;letter-spacing:-.015em}h3{font-size:1.2rem;font-weight:650;letter-spacing:-.02em;line-height:1.2}p{margin:0}b,strong{color:var(--ink);font-weight:600}code{font:.86em ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(18,19,22,.06);padding:.14em .42em;border-radius:6px;color:var(--ink)}.wrap{max-width:var(--max);margin:0 auto;padding:0 22px}.mid{max-width:900px}.muted{color:var(--muted)}.center{text-align:center}:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:#fff;padding:8px 14px;border-radius:8px;z-index:50}.skip:focus{left:8px}.glass,.card{background:var(--glass);-webkit-backdrop-filter:blur(22px) saturate(170%);backdrop-filter:blur(22px) saturate(170%);border:1px solid var(--edge);box-shadow:var(--shadow);border-radius:var(--radius)}header.top{--p:0;position:sticky;top:14px;z-index:20;padding:0 14px;margin-top:14px}.top .bar{max-width:calc(1040px - 440px * var(--p));margin:0 auto;height:calc(72px - 20px * var(--p));padding:0 calc(12px - 5px * var(--p)) 0 calc(22px - 8px * var(--p));border-radius:999px;display:flex;align-items:center;gap:calc(22px - 6px * var(--p));background:rgb(255 255 255 / calc(.24 + .26 * var(--p)));-webkit-backdrop-filter:blur(22px) saturate(190%) contrast(.62) brightness(1.3);backdrop-filter:blur(22px) saturate(190%) contrast(.62) brightness(1.3);border:1px solid rgb(255 255 255 / .7);box-shadow:inset 0 1px 0 rgb(255 255 255 / .88),0 0 0 1px rgb(18 19 22 / calc(.045 * var(--p))),0 16px 36px -18px rgb(38 48 68 / calc(.24 + .2 * var(--p)))}.brand{display:flex;align-items:center;gap:calc(11px - 2px * var(--p));font-size:calc(1.14rem - .14rem * var(--p));font-weight:650;color:var(--ink);text-decoration:none;letter-spacing:-.02em}.brand img{width:calc(36px - 10px * var(--p));height:calc(36px - 10px * var(--p))}.top nav{display:flex;gap:calc(28px - 8px * var(--p));margin-left:auto;font-size:calc(1rem - .08rem * var(--p))}.top nav a{color:var(--ink);opacity:.78;text-decoration:none}.top nav a:hover,.page-home nav a[data-nav="home"],.page-setup nav a[data-nav="setup"],.page-security nav a[data-nav="security"]{opacity:1;font-weight:600}.top .btn.small{padding:calc(12px - 4px * var(--p)) calc(22px - 6px * var(--p));font-size:calc(.98rem - .08rem * var(--p))}@media (max-width:620px){.top .bar{height:calc(62px - 12px * var(--p));gap:12px;padding:0 calc(9px - 2px * var(--p)) 0 14px}.top nav{gap:14px;font-size:.9rem}.top .btn.small{padding:calc(10px - 2px * var(--p)) calc(17px - 2px * var(--p));font-size:.92rem}.brand img{width:calc(32px - 6px * var(--p));height:calc(32px - 6px * var(--p))}.top nav a[data-nav="home"],.brand span{display:none}}.btn{display:inline-flex;align-items:center;gap:9px;padding:13px 22px;border-radius:999px;border:0;cursor:pointer;font:inherit;font-weight:600;text-decoration:none;white-space:nowrap;letter-spacing:-.01em;background:var(--ink);color:#fff;box-shadow:0 10px 24px -10px rgba(18,19,22,.55);transition:transform .15s ease,box-shadow .15s ease}.btn:hover{transform:translateY(-1px);box-shadow:0 14px 28px -10px rgba(18,19,22,.6)}.btn.small{padding:8px 16px;font-size:.92rem;box-shadow:none}.btn.big{padding:16px 28px;font-size:1.06rem}.btn.ghost{background:rgba(255,255,255,.6);color:var(--ink);border:1px solid var(--edge);box-shadow:0 8px 20px -14px rgba(38,48,68,.4)}.btn svg{width:18px;height:18px;flex:none}.btn svg.apple{width:19px;height:19px;margin-top:-3px}.cta{display:flex;flex-wrap:wrap;gap:12px 18px;justify-content:center;align-items:center;margin-top:32px}.fine{margin-top:16px;font-size:.9rem;color:var(--muted)}.textlink{color:var(--ink);font-weight:600}.plainlink{color:var(--muted);font-weight:500;text-decoration:none}.plainlink:hover{color:var(--ink)}.hero{padding:76px 0 20px;text-align:center}.chip{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;font-size:.86rem;font-weight:550;color:var(--text);margin-bottom:26px;background:rgba(255,255,255,.6);border:1px solid var(--edge);box-shadow:0 8px 20px -14px rgba(38,48,68,.4)}.chip i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(18,166,106,.16)}.lead{max-width:610px;margin:26px auto 0;font-size:clamp(1.12rem,2.1vw,1.34rem);line-height:1.5;color:var(--muted);text-wrap:balance}.lead .ink{color:var(--ink);font-weight:550}.scribble{position:relative;white-space:nowrap}.scribble svg{position:absolute;left:-1%;bottom:-.1em;width:102%;height:.2em;overflow:visible}.scribble path{fill:none;stroke:var(--green);stroke-width:5;stroke-linecap:round;vector-effect:non-scaling-stroke;opacity:.85}.pagehead{padding:70px 0 40px;text-align:center}.pagehead h1{font-size:clamp(2.8rem,6.6vw,4.8rem)}.stagebox{position:relative;max-width:980px;margin:56px auto 0;padding:12px;border-radius:36px}.demo{position:relative;aspect-ratio:16 / 9;border-radius:25px;overflow:hidden;background:#edf0ee;box-shadow:0 0 0 1px rgba(18,19,22,.06)}.demo video{display:block;width:100%;height:100%;object-fit:cover}.demo video[hidden]{display:none}.demo-btn{position:absolute;bottom:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:999px;cursor:pointer;font:600 .9rem/1 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",sans-serif;color:var(--ink);background:rgb(255 255 255 / .5);border:1px solid rgb(255 255 255 / .75);-webkit-backdrop-filter:blur(16px) saturate(180%);backdrop-filter:blur(16px) saturate(180%);box-shadow:inset 0 1px 0 rgb(255 255 255 / .9),0 12px 26px -12px rgb(38 48 68 / .55);transition:transform .15s ease,background .15s ease}.demo-btn:hover{transform:translateY(-1px);background:rgb(255 255 255 / .72)}.demo-btn svg{width:18px;height:18px;flex:none}.demo-pause{left:14px;width:40px;padding:0}.demo-sound{right:14px}.demo .i-play,.demo .i-on{display:none}.demo[data-paused] .i-pause{display:none}.demo[data-paused] .i-play{display:block}.demo[data-sound] .i-off{display:none}.demo[data-sound] .i-on{display:block}@media (max-width:560px){.stagebox{padding:8px;border-radius:26px}.demo{border-radius:19px}.demo-btn{height:34px;bottom:9px;font-size:.82rem;padding:0 12px}.demo-pause{left:9px;width:34px;padding:0}.demo-sound{right:9px}}.winbar i{border-radius:50%;background:#ff5f57}.winbar i:nth-child(2){background:#febc2e}.winbar i:nth-child(3){background:#28c840}@keyframes flow{to{stroke-dashoffset:-24}}.jot{position:absolute;z-index:2;font:700 1.14rem/1.2 var(--hand);color:var(--ink);width:140px;pointer-events:none}.jot svg{position:absolute;top:40px;width:96px;height:48px;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}.jot.one{left:-150px;top:38%;text-align:right;rotate:-4deg}.jot.one svg{left:104px}.jot.two{right:-150px;top:22%;text-align:left;rotate:4deg}.jot.two svg{right:104px}@media (max-width:1330px){.jot{display:none}}section{padding:84px 0}section.tight{padding:56px 0}.tinted{position:relative}.tinted::before{content:"";position:absolute;inset:6% 0 0;z-index:-1;pointer-events:none;background:radial-gradient(34% 30% at 16% 26%,rgba(170,240,208,.7),transparent 72%),radial-gradient(32% 30% at 86% 44%,rgba(190,218,255,.8),transparent 72%),radial-gradient(32% 28% at 30% 84%,rgba(255,219,186,.65),transparent 72%)}.sub{max-width:600px;margin:14px auto 0;color:var(--muted);font-size:1.06rem}.shot{border-radius:12px;box-shadow:var(--lift);border:1px solid rgba(18,19,22,.08)}.shot.card-shot{width:440px}.new{display:inline-block;margin-left:6px;padding:3px 10px;border-radius:999px;background:var(--green);color:#fff;font-size:.72rem;font-weight:650;line-height:1.4;letter-spacing:.01em;vertical-align:.18em}a.chip{text-decoration:none;transition:transform .18s ease}a.chip:hover{transform:translateY(-1px)}.letter{max-width:660px;margin:0 auto;padding:34px 36px;font-size:1.08rem}.letter p + p{margin-top:14px}.letter .sign{margin-top:18px;font:italic 2.1rem/1 var(--display);color:var(--ink)}@media (max-width:560px){.letter{padding:26px 22px}}.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;margin-top:44px}.tile{padding:28px;overflow:hidden;display:flex;flex-direction:column}.tile p{color:var(--muted);margin-top:8px;font-size:.99rem}.tile .art{margin-top:22px;flex:1;display:grid;place-items:center}.span2{grid-column:span 2}.span3{grid-column:span 3}.span4{grid-column:span 4}.span6{grid-column:span 6}.tile.side{flex-direction:row;gap:30px;align-items:center}.tile.side > div:first-child{flex:0 0 34%}.tile.side .art{margin-top:0}@media (max-width:900px){.bento{grid-template-columns:1fr}.span2,.span3,.span4,.span6{grid-column:auto}.tile.side{flex-direction:column;align-items:stretch}}.menu{width:min(100%,420px);padding:6px;border-radius:12px;font-size:.86rem;text-align:left;color:var(--ink);background:rgba(250,250,250,.86);border:1px solid rgba(18,19,22,.1);box-shadow:var(--lift)}.menu div{padding:4px 11px;border-radius:6px;display:flex;justify-content:space-between;gap:12px}.menu .dim{color:#9a9ea6}.menu .on{background:var(--blue);color:#fff}.menu .on kbd{color:#fff;opacity:.85}.menu hr{border:0;border-top:1px solid rgba(18,19,22,.1);margin:5px 11px}.menu kbd{font:inherit;color:#9a9ea6}.miniphone{width:96px;height:190px;border-radius:22px;background:#14181d;padding:6px;box-shadow:var(--lift)}.miniphone div{height:100%;border-radius:16px;background:#050607;display:grid;place-items:center;color:#7a8794}.miniphone svg{width:26px;height:26px}.keys{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}.keys kbd{display:grid;place-items:center;min-width:54px;height:54px;padding:0 12px;border-radius:12px;font:600 1.05rem -apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fff,#f1f2f4);border:1px solid rgba(18,19,22,.12);box-shadow:0 2px 0 rgba(18,19,22,.14),0 10px 18px -10px rgba(38,48,68,.4)}.readout{width:100%;display:grid;gap:8px;font-size:.92rem;text-align:left}.readout div{display:flex;gap:10px;align-items:baseline;padding:9px 13px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid rgba(18,19,22,.06);color:var(--ink)}.readout span{flex:none;width:88px;color:var(--muted);font-size:.82rem}.hop{display:flex;align-items:center;justify-content:center;gap:14px;color:var(--ink);font-size:.9rem;font-weight:600}.hop svg{width:34px;height:34px}.hop .waves{width:54px;height:24px;color:var(--green)}.hop .waves path{stroke-dasharray:4 6;animation:flow 1.6s linear infinite}.strip{display:grid;grid-template-columns:repeat(3,1fr);margin-top:40px;text-align:left}.strip > div{padding:30px 28px}.strip > div + div{border-left:1px solid var(--line)}.strip .n{font:600 .9rem ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--green);margin-bottom:14px}.strip p{color:var(--muted);margin-top:8px;font-size:.98rem}@media (max-width:820px){.strip{grid-template-columns:1fr}.strip > div + div{border-left:0;border-top:1px solid var(--line)}}.plain4{display:grid;grid-template-columns:repeat(4,1fr);gap:0 28px;margin-top:44px;text-align:left}.plain4 > div{border-top:1.5px solid var(--ink);padding-top:16px}.plain4 p{color:var(--muted);margin-top:6px;font-size:.97rem}@media (max-width:880px){.plain4{grid-template-columns:repeat(2,1fr);gap:28px}}@media (max-width:480px){.plain4{grid-template-columns:1fr}}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:40px;text-align:left}.grid2 .card{padding:30px 28px}.grid2 p{color:var(--muted);margin-top:10px;font-size:.98rem}@media (max-width:820px){.grid2{grid-template-columns:1fr}section{padding:64px 0}}.download{padding:50px 28px;text-align:center}.download img.icon{width:104px;height:104px;margin:0 auto 14px;filter:drop-shadow(0 16px 22px rgba(38,48,68,.22))}.specs{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 10px;margin-top:22px;color:var(--muted);font-size:.94rem}.specs span + span::before{content:"·";margin-right:10px}.hash{margin:26px auto 0;max-width:620px;font-size:.86rem;color:var(--muted)}.hash .value{display:flex;gap:10px;align-items:center;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.7);border:1px solid rgba(18,19,22,.07);text-align:left}.hash .value code{background:none;padding:0;word-break:break-all;flex:1;font-size:.8rem}.hash button{flex:none;font:inherit;font-size:.82rem;font-weight:600;cursor:pointer;color:var(--ink);background:#fff;border:1px solid rgba(18,19,22,.12);border-radius:8px;padding:6px 12px}.banner{display:none;max-width:620px;margin:0 auto 22px;padding:12px 18px;border-radius:14px;font-size:.95rem;text-align:center;background:rgba(219,234,254,.75);border:1px solid rgba(42,124,246,.28)}.banner.show{display:block}.guide{display:grid;gap:18px;margin-top:40px;counter-reset:guide}.guide .step{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:32px 34px}.guide .step .words::before{counter-increment:guide;content:counter(guide);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;margin-bottom:16px;background:var(--ink);color:#fff;font-weight:650;font-size:.95rem}.guide .step p{color:var(--muted);margin-top:10px}@media (max-width:820px){.guide .step{grid-template-columns:1fr;gap:26px;padding:26px 22px}}.guide .step.solo{grid-template-columns:1fr;gap:0}.picture{display:grid;place-items:center;min-height:180px}.mac-alert{width:262px;padding:22px 18px 16px;border-radius:18px;text-align:center;font-size:.82rem;color:var(--ink);background:rgba(250,250,250,.92);border:1px solid rgba(18,19,22,.1);box-shadow:var(--lift)}.mac-alert img{width:54px;height:54px;margin:0 auto 12px}.mac-alert b{display:block;font-size:.92rem;margin-bottom:6px}.mac-alert p{color:var(--muted);margin:0 0 14px;font-size:.78rem;line-height:1.45}.mac-alert .btns{display:grid;gap:7px}.mac-alert .btns span{padding:7px;border-radius:8px;background:rgba(18,19,22,.07);font-weight:600}.mac-alert .btns .go{background:var(--blue);color:#fff}.pick{outline:3px solid var(--green);outline-offset:3px}.settings,.dmg{width:min(100%,390px);border-radius:14px;overflow:hidden;font-size:.85rem;color:var(--ink);background:rgba(250,250,250,.92);border:1px solid rgba(18,19,22,.1);box-shadow:var(--lift)}.winbar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid rgba(18,19,22,.08);font-weight:650}.winbar i{width:11px;height:11px}.winbar span{margin-left:8px}.settings .body{padding:16px;display:grid;gap:10px}.settings .small{color:var(--muted);font-size:.78rem;font-weight:650}.settings .line{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:#fff;border:1px solid rgba(18,19,22,.07)}.settings .pill{flex:none;padding:5px 12px;border-radius:7px;background:rgba(18,19,22,.08);font-weight:600}.dmg .body{display:flex;justify-content:space-around;align-items:center;padding:30px 18px 24px;text-align:center}.dmg img{width:78px;height:78px;margin:0 auto 8px}.dmg .folder{width:76px;height:58px;margin:12px auto 16px;border-radius:8px;position:relative;background:linear-gradient(180deg,#6cbcff,#3a93f2)}.dmg .folder::before{content:"";position:absolute;left:0;top:-9px;width:34px;height:14px;border-radius:6px 8px 0 0;background:#6cbcff}.dmg .arrow{color:var(--muted);font-size:1.7rem}.menubar{width:min(100%,380px);display:flex;justify-content:flex-end;align-items:center;gap:16px;padding:8px 16px;border-radius:12px;font-size:.84rem;font-weight:600;color:var(--ink);background:rgba(250,250,250,.92);border:1px solid rgba(18,19,22,.1);box-shadow:var(--lift)}.menubar svg{width:18px;height:18px}.menubar .us{padding:4px 8px;border-radius:7px;background:rgba(18,166,106,.16);color:var(--green);display:grid}.android-alert{width:272px;padding:20px 20px 12px;border-radius:26px;font-size:.82rem;color:var(--ink);background:#fff;border:1px solid rgba(18,19,22,.08);box-shadow:var(--lift)}.android-alert b{display:block;font-size:1rem;margin-bottom:8px}.android-alert p{color:var(--muted);margin:0 0 12px;font-size:.8rem;line-height:1.45}.android-alert .check{display:flex;gap:9px;align-items:center;margin-bottom:12px}.android-alert .check i{width:17px;height:17px;border-radius:4px;background:var(--blue);flex:none;position:relative}.android-alert .check i::after{content:"";position:absolute;left:4px;top:4.5px;width:8px;height:4px;border-left:2px solid #fff;border-bottom:2px solid #fff;rotate:-45deg}.android-alert .btns{display:flex;justify-content:flex-end;gap:20px;font-weight:700;color:var(--blue);padding:6px 4px}.android-alert .btns .pick{border-radius:6px;padding:2px 8px}.note{padding:20px 24px;border-radius:18px;font-size:.97rem;margin-top:18px;background:rgba(255,244,214,.72);border:1px solid rgba(214,158,46,.32)}.note b{display:block;margin-bottom:4px}.note.calm{background:var(--glass);border-color:var(--edge)}.topics{display:grid;gap:18px}.topic{padding:32px 34px}.topic > * + *{margin-top:12px}.topic p,.topic li,.topic td{color:var(--muted)}.topic ul,.topic ol{padding-left:22px;display:grid;gap:8px}.topic .small{font-size:.88rem}.topic .hash{margin:16px 0 0;max-width:none}.topic .hash .value{margin-top:0}@media (max-width:560px){.topic{padding:24px 20px}}.facts{width:100%;border-collapse:collapse;font-size:.98rem;margin-top:6px}.facts th,.facts td{text-align:left;padding:14px 0;border-bottom:1px solid var(--line);vertical-align:top}.facts th{width:30%;padding-right:18px;font-weight:600;color:var(--ink)}.facts tr:last-child th,.facts tr:last-child td{border-bottom:0;padding-bottom:0}.facts .no{color:var(--green);font-weight:650}.faq{max-width:740px;margin:34px auto 0;text-align:left;border-top:1px solid var(--line)}.mid .faq{max-width:none}.faq details,.brands details{border-bottom:1px solid var(--line)}.faq summary,.brands summary{cursor:pointer;padding:17px 2px;font-weight:600;color:var(--ink);list-style:none;display:flex;justify-content:space-between;gap:16px}.faq summary::-webkit-details-marker,.brands summary::-webkit-details-marker{display:none}.faq summary::after,.brands summary::after{content:"+";color:var(--muted);font-weight:400;font-size:1.3rem;line-height:1}.faq details[open] summary::after,.brands details[open] summary::after{content:"–"}.faq details p,.brands details p{color:var(--muted);padding:0 2px 20px;margin:0}.brands{margin-top:20px;border-top:1px solid var(--line)}.brands details:last-child{border-bottom:0}.brands details:last-child summary{padding-bottom:2px}.brands details[open]:last-child p{padding:14px 2px 0}.brands ol{margin:0;padding:0 2px 20px 24px;color:var(--muted);display:grid;gap:8px}.next{display:flex;flex-wrap:wrap;gap:14px 24px;justify-content:space-between;align-items:center;padding:28px 34px;margin-top:18px;text-align:left}.faq + .next{margin-top:44px}.next p{color:var(--muted);margin-top:4px}footer{padding:36px 0 56px;color:var(--muted);font-size:.9rem;margin-top:30px}footer .wrap{display:grid;gap:18px;border-top:1px solid var(--line);padding-top:30px}footer .links{display:flex;flex-wrap:wrap;gap:8px 24px}footer .links a{color:var(--ink);text-decoration:none}footer .links a:hover{text-decoration:underline}footer .legal{display:grid;gap:8px;font-size:.84rem}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.hop .waves path{animation:none}.btn,.demo-btn,a.chip{transition:none}}</style>
+</head>
+<body class="page-setup">
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="top">
+  <div class="bar">
+    <a class="brand" href="/"><img src="/assets/icon-72.png" alt="" width="36" height="36"><span>Phone Mirror</span></a>
+    <nav aria-label="Main">
+      <a href="/#features" data-nav="home">Features</a>
+      <a href="/setup/" data-nav="setup">Set up</a>
+      <a href="/security/" data-nav="security">Security</a>
+    </nav>
+    <a class="btn small" href="/download/">Download</a>
+  </div>
+</header>
+
+<main id="main">
+
+
+<section class="pagehead">
+  <div class="wrap mid">
+    <h1>Set up your phone</h1>
+    <p class="lead">One setting on the phone, one tap on Allow, and you are mirroring. It takes about two minutes, once.</p>
+  </div>
+</section>
+
+<section class="tight tinted" style="padding-top: 0">
+  <div class="wrap mid">
+    <div class="guide" style="margin-top: 0">
+
+      <div class="card step solo">
+        <div class="words">
+          <h3>Turn on USB debugging</h3>
+          <p>USB debugging is a switch in Android's settings. It lets a computer you approve see and control the phone, which is how Phone Mirror works. The switch sits in a hidden menu called Developer options, so you unlock that menu first. Pick your phone:</p>
+        </div>
+        <div class="brands">
+          <details open>
+            <summary>Samsung</summary>
+            <ol>
+              <li>Open <b>Settings</b> → <b>About phone</b> → <b>Software information</b>.</li>
+              <li>Tap <b>Build number</b> seven times. Enter your PIN if asked.</li>
+              <li>Go back to <b>Settings</b>. <b>Developer options</b> is now at the very bottom.</li>
+              <li>Turn on <b>USB debugging</b> and tap OK.</li>
+            </ol>
+          </details>
+          <details>
+            <summary>Xiaomi, POCO and Redmi</summary>
+            <ol>
+              <li>Open <b>Settings</b> → <b>About phone</b>.</li>
+              <li>Tap <b>OS version</b> seven times (on older phones it is called <b>MIUI version</b>).</li>
+              <li>Go back to <b>Settings</b> → <b>Additional settings</b> → <b>Developer options</b>.</li>
+              <li>Turn on <b>USB debugging</b>.</li>
+              <li>Also turn on <b>USB debugging (Security settings)</b>. Without it you can see the phone on your Mac but not click or type. The phone asks for a SIM card and a Mi account before it lets you switch this on.</li>
+            </ol>
+          </details>
+          <details>
+            <summary>OnePlus, Oppo and Realme</summary>
+            <ol>
+              <li>Open <b>Settings</b> → <b>About device</b> → <b>Version</b>.</li>
+              <li>Tap <b>Build number</b> seven times. Enter your PIN if asked.</li>
+              <li>Go back to <b>Settings</b> → <b>Additional settings</b> (on some phones <b>System</b>) → <b>Developer options</b>.</li>
+              <li>Turn on <b>USB debugging</b> and tap OK.</li>
+            </ol>
+          </details>
+          <details>
+            <summary>Google Pixel, Motorola, Nothing and most other phones</summary>
+            <ol>
+              <li>Open <b>Settings</b> → <b>About phone</b>.</li>
+              <li>Tap <b>Build number</b> seven times. Enter your PIN if asked. The phone says “You are now a developer”.</li>
+              <li>Go back to <b>Settings</b> → <b>System</b> → <b>Developer options</b>.</li>
+              <li>Turn on <b>USB debugging</b> and tap OK.</li>
+            </ol>
+          </details>
+          <details>
+            <summary>Can't find it?</summary>
+            <p>Open Settings and use the search box at the top. Search for “Build number” to unlock Developer options, then search for “USB debugging”. The names are the same on almost every Android phone; only the place in the menus differs.</p>
+          </details>
+        </div>
+      </div>
+
+      <div class="card step">
+        <div class="words">
+          <h3>Plug in the cable and tap Allow</h3>
+          <p>Connect the phone to your Mac with a USB cable and unlock the phone. A question appears on the phone.</p>
+          <p>Tick <b>Always allow from this computer</b>, then tap <b>Allow</b>. Only ever do this for a computer that is yours.</p>
+        </div>
+        <div class="picture">
+          <div class="android-alert" role="img" aria-label="The phone asks: Allow USB debugging? With a ticked box, Always allow from this computer, and the buttons Cancel and Allow.">
+            <b>Allow USB debugging?</b>
+            <p>The computer's RSA key fingerprint is:<br>3F:9A:…:C2:71</p>
+            <div class="check"><i></i>Always allow from this computer</div>
+            <div class="btns"><span>Cancel</span><span class="pick">Allow</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card step">
+        <div class="words">
+          <h3>Click Mirror Phone</h3>
+          <p>Click the phone icon in your Mac's menu bar and choose <b>Mirror Phone</b>. Your phone appears in a window.</p>
+          <p>The app's own <b>Getting Started</b> window shows these same steps and ticks them off as you go. You can open it from the menu any time.</p>
+        </div>
+        <div class="picture">
+          <picture>
+            <source srcset="/assets/getting-started.webp" type="image/webp">
+            <img class="shot" src="/assets/getting-started.png" width="1080" height="914" loading="lazy" decoding="async"
+                 alt="The Getting Started window in Phone Mirror with all three steps ticked.">
+          </picture>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="tight">
+  <div class="wrap mid center">
+    <h2>Lose the cable</h2>
+    <p class="sub">Two things to try once the first mirror works.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Go Wireless</h3>
+        <p>With the cable still plugged in, choose <b>Go Wireless (home Wi-Fi)</b> in the menu. When it says it is ready, unplug the cable. Phone and Mac must be on the same Wi-Fi network.</p>
+        <p>macOS may ask whether Phone Mirror may find devices on your local network. Choose Allow: that is how it reaches the phone.</p>
+        <p>After the phone restarts, plug the cable in once and choose Go Wireless again.</p>
+      </div>
+      <div class="card">
+        <h3>Pocket mode</h3>
+        <p>Tick <b>Pocket mode</b> in the menu before you click Mirror Phone. The phone's own screen goes dark and it stays awake for you, so it can sit in your pocket or bag.</p>
+        <p>Do not press the phone's power button while you mirror: that really puts it to sleep. If it happens, right-click in the mirror window to wake it and type your PIN on the Mac.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="quick-share">
+  <div class="wrap mid center">
+    <h2>Send files with Quick Share</h2>
+    <p class="sub">This part needs no cable and no setting on the phone.</p>
+    <div class="grid2">
+      <div class="card">
+        <h3>Switch it on, once</h3>
+        <p>Click the phone icon in your Mac's menu bar and tick <b>Receive with Quick Share</b>. The menu then shows the name your Mac is visible under.</p>
+        <p>macOS may ask whether Phone Mirror may find devices on your local network. Choose Allow: that is how the phone finds your Mac.</p>
+      </div>
+      <div class="card">
+        <h3>Send from the phone</h3>
+        <p>Open a photo or a file on the phone, tap <b>Share</b>, then <b>Quick Share</b>, and pick your Mac. A small card appears in the corner of the Mac's screen. Click <b>Accept</b>, and the file is saved in your Downloads folder.</p>
+        <p>Phone and Mac must be on the same Wi-Fi. It also works with a phone you have never plugged in.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="tight" id="fixes">
+  <div class="wrap mid center">
+    <h2>Quick fixes</h2>
+    <p class="sub">If something goes wrong, it is usually one of these.</p>
+    <div class="faq">
+      <details><summary>The menu says “Phone not found”</summary><p>Unlock the phone and look for the Allow question on it. Try another cable or another port: some cables only charge and carry no data. Check that USB debugging is still on in Developer options.</p></details>
+      <details><summary>I can see the phone but clicks and typing do nothing</summary><p>On Xiaomi, POCO and Redmi phones, turn on “USB debugging (Security settings)” in Developer options, then stop and start mirroring. On other phones, look in Developer options for a switch that mentions input or permission monitoring.</p></details>
+      <details><summary>Wireless stopped working</summary><p>Android switches wireless debugging off whenever the phone restarts. Plug the cable in once and choose Go Wireless again. Also check that both devices are on the same Wi-Fi and not on a guest network.</p></details>
+      <details><summary>It stutters over Wi-Fi</summary><p>Look at the Connection line in the menu. A crowded 2.4 GHz network is the usual cause. Use a 5 GHz network, or Hotspot Mode, which links the Mac to the phone directly. The cable is always the smoothest.</p></details>
+      <details><summary>My Mac doesn't show up in Quick Share</summary><p>Check that Receive with Quick Share is ticked in Phone Mirror's menu, and that phone and Mac are on the same Wi-Fi. A guest network keeps devices apart, so it won't work there. On the Mac, open System Settings → Privacy &amp; Security → Local Network and make sure Phone Mirror is switched on. If the Mac's firewall is on, allow incoming connections for Phone Mirror when macOS asks.</p></details>
+      <details><summary>The mirror window went black</summary><p>The phone went to sleep, usually because its power button was pressed. Right-click in the mirror window to wake it, then unlock with your PIN from the Mac's keyboard.</p></details>
+      <details><summary>There is no sound</summary><p>Sound needs Android 11 or newer. Tick Audio in the menu, then stop and start mirroring.</p></details>
+      <details><summary>None of this helped</summary><p>Write to <a href="mailto:contactphonemirror@gmail.com">contactphonemirror@gmail.com</a> with your phone's model, its Android version, and what the first line of the menu says.</p></details>
+      <details><summary>How do I undo all this?</summary><p>On the phone, open Developer options, tap “Revoke USB debugging authorisations”, and switch USB debugging off. On the Mac, quit Phone Mirror from its menu and drag it from Applications to the Bin.</p></details>
+    </div>
+
+    <div class="card next">
+      <div><h3>Haven't got the app yet?</h3><p>The download is 15 MB.</p></div>
+      <a class="btn" href="/download/"><svg class="apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>Download for Mac</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="/download/">Download</a>
+      <a href="/setup/">Set up your phone</a>
+      <a href="/security/">Privacy and security</a>
+      <a href="mailto:contactphonemirror@gmail.com">Contact</a>
+    </div>
+    <div class="legal">
+      <div>Made by Divas Sharma. © 2026 · phonemirror.in · version 1.3 · <a href="mailto:contactphonemirror@gmail.com">contactphonemirror@gmail.com</a></div>
+      <div>Phone Mirror runs on <a href="https://github.com/Genymobile/scrcpy" rel="noopener">scrcpy</a> by Genymobile and adb from the Android Open Source Project, both under the Apache License 2.0. Their notices are inside the app.</div>
+      <div>Android and Quick Share are trademarks of Google LLC. Mac and macOS are trademarks of Apple Inc. Phone Mirror is an independent app, not affiliated with or endorsed by either company.</div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/site.js?v=202610131242" defer></script>
+</body>
+</html>
