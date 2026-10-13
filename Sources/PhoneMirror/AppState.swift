@@ -329,9 +329,7 @@ final class AppState: ObservableObject {
             encoder = await hardwareEncoder(for: target)
         }
 
-        // `-s <serial>` picks exactly one phone. --no-terminal-title stops scrcpy from
-        // writing terminal-title codes into its log (we read the log live for FPS).
-        var arguments = ["-s", target.serial, "--window-title=Phone Mirror", "--no-terminal-title"]
+        var arguments = MirrorOptions.basics(serial: target.serial)
         arguments += settings.scrcpyArguments(hardwareEncoder: encoder, safeMode: safeMode)
         let options = MirrorOptions(pocketMode: pocketMode, stayAwake: stayAwake, realKeyboard: realKeyboard,
                                     audio: audio, showFPS: showFPS, overWiFi: target.connection == .wifi)

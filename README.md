@@ -122,6 +122,32 @@ Added later, following from the same measurements (not yet re-measured on the ph
   (`--no-mouse-hover`): those messages used the same crowded air as the video. Clicks, drags and scrolling are
   unchanged.
 
+### Measured again on 2026-10-13 (same phone, the app's own scrcpy 5.0 for the last line)
+Three runs each, the numbers are medians. "Tap" is the time from sending a tap until the frame that shows it
+arrives on the Mac; the tool's own way of sending a tap is slow, so real use is quicker than this number.
+"Video" is how much later than the fastest frame a typical frame arrives while scrolling.
+
+| Connection and setting | Tap | Video | Frame rate |
+|---|---|---|---|
+| USB, as the app does it (H.264, 488×1088) | 98 ms | 10 ms | 59.5 fps |
+| USB, H.265 at the same size | 98 ms | 10 ms | 59.5 fps |
+| USB, larger picture (576×1280) | 104 ms | 15 ms | 58.8 fps |
+| USB, 1600 px or 1920 px | 108–115 ms | 52 ms | 58–59 fps |
+| Wi-Fi (2.4 GHz router), "Low latency" as the app does it | 93 ms | 5 ms, 27 ms when the network is busy | 58.9 fps |
+| Wi-Fi, H.265 at the same bitrate | 95 ms | 6 ms, 37 ms when busy | 58.1 fps |
+| Wi-Fi, 2 Mbit/s (H.264 or H.265) | 108–129 ms | 5–35 ms | 56–58 fps |
+
+What follows from it:
+- **Nothing was faster than the settings the app already uses**, on the cable or on Wi-Fi. H.265, lower
+  bitrates and bigger pictures were all equal or slower, so the presets are unchanged.
+- Over Wi-Fi the picture is as quick as over the cable while the network is calm. The lag that remains comes
+  and goes with the network (the same setting gave 5 ms in one run and 27 ms in the next).
+- The app's own scrcpy 5.0 decodes on the Mac's hardware (VideoToolbox) and held 51–61 fps while scrolling.
+- **Connecting from the Mac (`--force-adb-forward`) is now always used.** scrcpy's default direction failed
+  with "Server connection failed" in 7 of 10 starts over the cable while wireless debugging was also on (the
+  state right after Go Wireless, before the cable is unplugged). The other direction worked every time: on
+  the cable, on Wi-Fi, and with both.
+
 ## Getting the lowest lag
 1. **USB cable** is always best.
 2. **Hotspot Mode** is the best wireless option: the phone talks to the Mac directly (one wireless trip, no

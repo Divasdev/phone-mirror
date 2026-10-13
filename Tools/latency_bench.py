@@ -68,6 +68,20 @@ CONFIGS = {
     "800":       dict(BASE, max_size=800),
     "1280":      dict(BASE, max_size=1280),
     "fps120":    {k: v for k, v in BASE.items() if k != "max_fps"},
+    # USB (2026-10-13): what the app's "Best (USB)" gives on this phone (scrcpy falls back to 1088 px,
+    # 8 Mbit/s by default), larger pictures, constant bitrate, and H.265.
+    "usb_app":   {"video_codec": "h264", "max_size": 1088, "max_fps": 60},
+    "usb_1280":  {"video_codec": "h264", "max_size": 1280, "max_fps": 60},
+    "usb_1600":  {"video_codec": "h264", "max_size": 1600, "max_fps": 60},
+    "usb_1920":  {"video_codec": "h264", "max_size": 1920, "max_fps": 60},
+    "usb_cbr":   {"video_codec": "h264", "max_size": 1088, "max_fps": 60, "video_codec_options": "bitrate-mode:int=2"},
+    "h265_1088": {"video_codec": "h265", "max_size": 1088, "max_fps": 60},
+    "h265_1280": {"video_codec": "h265", "max_size": 1280, "max_fps": 60},
+    "usb_cbr_1280": {"video_codec": "h264", "max_size": 1280, "max_fps": 60, "video_codec_options": "bitrate-mode:int=2"},
+    "h265_1600": {"video_codec": "h265", "max_size": 1600, "max_fps": 60},
+    "h265_1920": {"video_codec": "h265", "max_size": 1920, "max_fps": 60},
+    "h265_cbr4_800": dict(BASE, video_codec="h265", video_bit_rate=4_000_000, max_size=800, video_codec_options="bitrate-mode:int=2"),
+    "h265_cbr2_800": dict(BASE, video_codec="h265", video_bit_rate=2_000_000, max_size=800, video_codec_options="bitrate-mode:int=2"),
     # constant bitrate (CBR) variants: steadier traffic, fewer bursts on a weak link
     "cbr8":      dict(BASE, video_bit_rate=8_000_000, video_codec_options="bitrate-mode:int=2"),
     "cbr4":      dict(BASE, video_bit_rate=4_000_000, video_codec_options="bitrate-mode:int=2"),
@@ -92,7 +106,17 @@ DEFAULT_SET = ["default", "base", "prio_lat0", "prio", "lat1", "qti_ll", "cbr", 
                "4M", "8M", "800", "1280", "fps120"]
 
 
-def find_adb():
+APP_ADB = "/Applications/Phone Mirror.app/Contents/Helpers/adb"
+
+
+def find_adb(use_app_copy=False):
+    # --app-adb: use the adb inside the installed Phone Mirror app. Needed for Wi-Fi tests on macOS 15+:
+    # only the app has the "Local Network" permission, so the adb server has to be the one the app started
+    # (same version as this client, so the client does not restart it).
+    if use_app_copy:
+        if os.access(APP_ADB, os.X_OK):
+            return APP_ADB
+        sys.exit("the adb inside /Applications/Phone Mirror.app was not found")
     for path in ADB_CANDIDATES:
         real = os.path.realpath(path)
         if real.startswith("/opt/homebrew/") and os.access(real, os.X_OK):
@@ -381,6 +405,7 @@ def main():
     ap.add_argument("--ping", help="phone IP to ping while streaming")
     ap.add_argument("--debug", action="store_true")
     ap.add_argument("--list", action="store_true")
+    ap.add_argument("--app-adb", action="store_true", help="use the adb inside the installed Phone Mirror app")
     ap.add_argument("--options", help="extra ad-hoc config as key=value;key=value")
     args = ap.parse_args()
 
@@ -397,7 +422,7 @@ def main():
         configs["custom"] = dict(kv.split("=", 1) for kv in args.options.split(";"))
 
     version, server = scrcpy_version_and_server()
-    bench = Bench(find_adb(), args.serial, version, server, args.inject_serial, args.debug)
+    bench = Bench(find_adb(args.app_adb), args.serial, version, server, args.inject_serial, args.debug)
     print("scrcpy server %s, device %s, %d config(s) x %d" % (version, args.serial, len(configs), args.repeat))
     results = {n: [] for n in configs}
     bench.prepare_phone()

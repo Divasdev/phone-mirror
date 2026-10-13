@@ -96,6 +96,20 @@ struct StreamSettings {
 
 /// The on/off choices from the menu, turned into scrcpy options.
 struct MirrorOptions: Equatable {
+    /// What every mirror is started with, whatever the preset.
+    ///  - `-s <serial>` picks exactly one phone.
+    ///  - `--window-title=Phone Mirror` names the window.
+    ///  - `--no-terminal-title` stops scrcpy from writing terminal-title codes into its log (the
+    ///    log is read live for the FPS line).
+    ///  - `--force-adb-forward` makes the Mac connect to the phone instead of the other way round.
+    ///    Measured on 2026-10-13 (POCO X4 Pro, scrcpy 5.0): scrcpy's default direction failed with
+    ///    "Server connection failed" in 7 of 10 starts over the cable while wireless debugging was
+    ///    also on (the state right after "Go Wireless", before the cable is unplugged). With this
+    ///    option every start worked: cable, Wi-Fi, and both together.
+    static func basics(serial: String) -> [String] {
+        ["-s", serial, "--window-title=Phone Mirror", "--no-terminal-title", "--force-adb-forward"]
+    }
+
     var pocketMode = false
     var stayAwake = true
     var realKeyboard = false

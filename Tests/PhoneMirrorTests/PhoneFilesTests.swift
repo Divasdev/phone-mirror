@@ -295,6 +295,15 @@ private struct Unchecked<Value>: @unchecked Sendable {
 
 // MARK: - Settings
 
+@Test func everyMirrorNamesOnePhoneAndConnectsFromTheMac() {
+    let basics = MirrorOptions.basics(serial: "abc123")
+    #expect(Array(basics.prefix(2)) == ["-s", "abc123"])
+    #expect(basics.contains("--window-title=Phone Mirror"))
+    // The default direction of scrcpy's connection failed on the real phone while the cable and
+    // wireless debugging were both in use; connecting from the Mac always worked.
+    #expect(basics.contains("--force-adb-forward"))
+}
+
 @Test func usbPresetIsCappedAt60Frames() {
     #expect(StreamSettings.best.scrcpyArguments(hardwareEncoder: nil, safeMode: false) == ["--max-fps=60"])
 }

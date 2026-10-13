@@ -22,7 +22,7 @@ OUT = ROOT / "dist" / "site"
 DMG = ROOT / "dist" / "Phone-Mirror.dmg"
 INFO = ROOT / "Resources" / "Info.plist"
 
-SITE_URL = "https://phonemirror.in"          # where the site will live
+SITE_URL = "https://www.phonemirror.in"      # where the site lives (the address whose certificate works)
 
 # The Apple logo shown on the "Download for Mac" buttons ({{apple}} in a page).
 APPLE = ('<svg class="apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415'

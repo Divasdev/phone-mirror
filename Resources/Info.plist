@@ -2,37 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleIdentifier</key>
-    <string>in.phonemirror.app</string>
-    <key>CFBundleName</key>
-    <string>Phone Mirror</string>
-    <key>CFBundleDisplayName</key>
-    <string>Phone Mirror</string>
-    <key>CFBundleExecutable</key>
-    <string>PhoneMirror</string>
-    <key>CFBundleIconFile</key>
-    <string>AppIcon</string>
-    <key>CFBundlePackageType</key>
-    <string>APPL</string>
-    <key>CFBundleShortVersionString</key>
-    <string>1.3</string>
-    <key>CFBundleVersion</key>
-    <string>4</string>
-    <key>LSMinimumSystemVersion</key>
-    <string>14.0</string>
-    <!-- Menu bar only: no Dock icon, no app menu -->
-    <key>LSUIElement</key>
-    <true/>
-    <key>NSHighResolutionCapable</key>
-    <true/>
-    <!-- Quick Share: macOS asks the person once before the app may use the local network -->
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>Phone Mirror uses your local network to reach your phone, and to receive files your phone sends with Quick Share.</string>
-    <key>NSBonjourServices</key>
-    <array>
-        <string>_FC9F5ED42C8A._tcp</string>
-    </array>
-    <key>LSApplicationCategoryType</key>
-    <string>public.app-category.utilities</string>
+	<key>CFBundleDisplayName</key>
+	<string>Phone Mirror</string>
+	<key>CFBundleExecutable</key>
+	<string>PhoneMirror</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIdentifier</key>
+	<string>in.phonemirror.app</string>
+	<key>CFBundleName</key>
+	<string>Phone Mirror</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.3</string>
+	<key>CFBundleVersion</key>
+	<string>5</string>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>14.0</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_FC9F5ED42C8A._tcp</string>
+	</array>
+	<key>NSHighResolutionCapable</key>
+	<true/>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>Phone Mirror uses your local network to reach your phone, and to receive files your phone sends with Quick Share.</string>
 </dict>
 </plist>
