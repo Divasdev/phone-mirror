@@ -9,6 +9,8 @@ with the download itself. Only Python's standard library is used.
 """
 
 import hashlib
+import html
+import json
 import pathlib
 import plistlib
 import re
@@ -32,6 +34,25 @@ APPLE = ('<svg class="apple" viewBox="0 0 24 24" fill="currentColor" aria-hidden
          '-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83'
          '-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>')
 DOWNLOAD = "/download/Phone-Mirror.dmg"      # the download's address on the site
+
+# What search engines may do with a page, unless the page says otherwise (robots: in the block at its top).
+ROBOTS = "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+
+# The app in one sentence and as a list, for search engines and AI assistants (see schema() below).
+# Like everything on the site, it may only say what the app does today.
+SUMMARY = ("Phone Mirror is a Mac menu bar app for Android screen mirroring. It shows your Android phone's "
+           "screen in a window on your Mac, over a USB cable or Wi-Fi, and you control the phone with the "
+           "Mac's keyboard and pointer.")
+FEATURES = [
+    "Mirror an Android phone's screen in a window on the Mac, over a USB cable or Wi-Fi",
+    "Control the phone with the Mac's keyboard and pointer, and copy and paste between the two",
+    "Receive files from the phone with Quick Share, with no cable and nothing installed on the phone",
+    "Drag files and folders both ways between the Mac and the phone",
+    "Pocket mode: the phone's own screen stays dark while you use it from the Mac",
+    "Wireless over home Wi-Fi or the phone's own hotspot",
+    "Live frame rate and connection quality in the menu",
+    "No account, no analytics, and the app makes no internet connections",
+]
 
 
 def fill(text, values):
@@ -67,6 +88,101 @@ def head_extras(about):
     return "".join(line + "\n" for line in lines)
 
 
+def plain(piece):
+    """The words of a piece of a page, without its tags."""
+    words = re.sub(r"<[^>]+>", " ", piece)
+    words = re.sub(r"\s+", " ", html.unescape(words)).strip()
+    return re.sub(r" ([.,:;!?)])", r"\1", words)
+
+
+def questions(body):
+    """The questions and answers in a page's question lists (class "faq"), in plain words."""
+    found = []
+    for block in re.findall(r'<div class="faq">(.*?)</div>', body, re.S):
+        for question, answer in re.findall(r"<summary>(.*?)</summary>(.*?)</details>", block, re.S):
+            found.append((plain(question), plain(answer)))
+    return found
+
+
+def steps(body):
+    """The numbered steps of a page's guide (class "card step"): each one's heading and its words.
+    A step whose words only make sense with its picture or its lists says it again in data-howto."""
+    found = []
+    pattern = r'<div class="card step[^"]*"(?: data-howto="([^"]*)")?>\s*<div class="words">(.*?)</div>'
+    for told, words in re.findall(pattern, body, re.S):
+        name = plain(re.search(r"<h3>(.*?)</h3>", words, re.S).group(1))
+        text = html.unescape(told) or " ".join(plain(p) for p in re.findall(r"<p>(.*?)</p>", words, re.S))
+        found.append((name, text))
+    return found
+
+
+def schema(about, body, facts, changed):
+    """What a page is, in the form search engines and AI assistants read (schema.org as JSON-LD).
+    Set in the block at the top of a page:
+      schema: app        the page presents the app itself (home, download)
+      crumb: Name        the page's name in the trail "Phone Mirror > Name"
+      howto: Title       the page's guide steps are the answer to this "how to"
+    Questions and steps are read from the page's own words, so this never says more than the page.
+    There is no price and there are no ratings in it, on purpose."""
+    if "noindex" in about.get("robots", ""):
+        return ""
+    site, app, maker = SITE_URL + "/#website", SITE_URL + "/#app", SITE_URL + "/#maker"
+    url = SITE_URL + about["path"]
+    page = {"@type": "WebPage", "@id": url, "url": url, "name": about["title"],
+            "description": about["description"], "inLanguage": "en", "dateModified": changed,
+            "isPartOf": {"@id": site},
+            "primaryImageOfPage": {"@type": "ImageObject", "url": SITE_URL + "/assets/og.png",
+                                   "width": 1200, "height": 630}}
+    graph = [
+        {"@type": "WebSite", "@id": site, "url": SITE_URL + "/", "name": "Phone Mirror",
+         "alternateName": ["PhoneMirror", "phonemirror.in"], "description": SUMMARY, "inLanguage": "en",
+         "publisher": {"@id": maker}},
+        {"@type": "Person", "@id": maker, "name": "Divas Sharma", "url": SITE_URL + "/"},
+        page,
+    ]
+
+    if about.get("schema") == "app":
+        page["about"] = {"@id": app}
+        graph.append({
+            "@type": "SoftwareApplication", "@id": app, "name": "Phone Mirror", "alternateName": "PhoneMirror",
+            "description": SUMMARY, "url": SITE_URL + "/", "applicationCategory": "UtilitiesApplication",
+            "operatingSystem": "macOS 14 or later", "processorRequirements": "Apple Silicon (M1 and newer)",
+            "softwareRequirements": "An Android phone with Android 5 or newer",
+            "softwareVersion": facts["version"], "fileSize": facts["size"],
+            "downloadUrl": SITE_URL + DOWNLOAD, "installUrl": SITE_URL + "/download/",
+            "softwareHelp": {"@type": "CreativeWork", "url": SITE_URL + "/setup/"},
+            "featureList": FEATURES, "image": SITE_URL + "/assets/icon.png",
+            "screenshot": [SITE_URL + "/assets/phone-files.png", SITE_URL + "/assets/quick-share.png",
+                           SITE_URL + "/assets/getting-started.png"],
+            "author": {"@id": maker}, "publisher": {"@id": maker}})
+
+    asked = questions(body)
+    if asked:
+        page["@type"] = ["WebPage", "FAQPage"]
+        page["mainEntity"] = [{"@type": "Question", "name": question,
+                               "acceptedAnswer": {"@type": "Answer", "text": answer}}
+                              for question, answer in asked]
+
+    if about.get("howto"):
+        graph.append({
+            "@type": "HowTo", "@id": url + "#howto", "name": about["howto"], "inLanguage": "en",
+            "mainEntityOfPage": {"@id": url},
+            "step": [{"@type": "HowToStep", "position": number, "name": name, "text": text}
+                     for number, (name, text) in enumerate(steps(body), 1)]})
+
+    if about.get("crumb"):
+        page["breadcrumb"] = {"@id": url + "#trail"}
+        graph.append({
+            "@type": "BreadcrumbList", "@id": url + "#trail",
+            "itemListElement": [
+                {"@type": "ListItem", "position": 1, "name": "Phone Mirror", "item": SITE_URL + "/"},
+                {"@type": "ListItem", "position": 2, "name": about["crumb"], "item": url}]})
+
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False,
+                      separators=(",", ":"))
+    return '<script type="application/ld+json">' + data.replace("</", "<\\/") + "</script>\n"
+
+
 def main():
     if not DMG.exists():
         sys.exit("Run ./release.sh first: dist/Phone-Mirror.dmg is not there yet.")
@@ -97,20 +213,24 @@ def main():
     paths = []
     for page in sorted((SITE / "pages").glob("*.html")):
         text = page.read_text()
+        # The day this page last changed: its own words, the frame around them, or the download it describes.
+        changed = time.strftime("%Y-%m-%d", time.localtime(max(
+            file.stat().st_mtime for file in (page, SITE / "layout.html", DMG))))
         header = re.match(r"\s*<!--(.*?)-->", text, re.S)
         if not header:
             sys.exit(f"{page.name} has no title/description/path block at the top")
         about = dict(line.split(":", 1) for line in header.group(1).strip().splitlines())
         about = {key.strip(): value.strip() for key, value in about.items()}
         body = fill(text[header.end():], facts)
-        html = fill(layout, {**facts, **about, "head": head_extras(about), "content": body})
+        finished = fill(layout, {"robots": ROBOTS, **facts, **about, "head": head_extras(about),
+                                 "schema": schema(about, body, facts, changed), "content": body})
 
         path = about["path"]
         target = OUT / (path.lstrip("/") + "index.html" if path.endswith("/") else path.lstrip("/"))
         target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(html)
+        target.write_text(finished)
         if about.get("nav") != "none":
-            paths.append(path)
+            paths.append((path, changed))
 
     # The download itself, and the small files search engines and hosts look for.
     (OUT / "download").mkdir(exist_ok=True)
@@ -119,7 +239,10 @@ def main():
     (OUT / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
     (OUT / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        + "".join(f"  <url><loc>{SITE_URL}{path}</loc></url>\n" for path in paths) + "</urlset>\n")
+        + "".join(f"  <url><loc>{SITE_URL}{path}</loc><lastmod>{changed}</lastmod></url>\n"
+                  for path, changed in sorted(paths)) + "</urlset>\n")
+    # The site in plain words for AI assistants (the llms.txt convention).
+    (OUT / "llms.txt").write_text(fill((SITE / "llms.txt").read_text(), facts))
     (OUT / ".nojekyll").write_text("")
 
     print(f"Built dist/site: version {facts['version']}, {facts['size']}, {len(paths)} pages")

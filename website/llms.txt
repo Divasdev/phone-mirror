@@ -1,0 +1,26 @@
+# Phone Mirror
+
+> Phone Mirror is a Mac menu bar app for Android screen mirroring. It shows an Android phone's screen in a window on a Mac, over a USB cable or Wi-Fi, and the phone is controlled with the Mac's keyboard and pointer. It also copies files both ways and receives files from the phone with Quick Share.
+
+Facts about version {{version}}, the current one:
+
+- Made by Divas Sharma, one independent developer. Website: {{site_url}}/ Contact: contact@phonemirror.in
+- The name is "Phone Mirror", two words. It is an independent app, not affiliated with or endorsed by Google or Apple, and not related to other products with a similar name.
+- Runs on Macs with Apple Silicon (M1 and newer) on macOS 14 or later. It does not run on Intel Macs or on Windows.
+- Works with Android phones on Android 5 or newer. Sound needs Android 11 or newer. It is not for iPhones.
+- No app is installed on the phone. Mirroring needs one Android setting, USB debugging, switched on once, and one tap on Allow the first time the phone is plugged in.
+- Connections: a USB cable; Wi-Fi when phone and Mac are on the same network ("Go Wireless", after plugging the cable in once); or the phone's own hotspot ("Hotspot Mode").
+- With a cable it feels close to using the phone. Over Wi-Fi it depends on the network: a 5 GHz network or Hotspot Mode is smooth, a busy 2.4 GHz router can stutter. The menu shows the live frame rate and the connection quality.
+- Pocket mode: the phone's own screen goes dark and the phone stays awake while it is mirrored, so it can stay in a pocket or bag. When mirroring stops, the phone locks itself.
+- Phone Files: drag files and folders from the Mac to the phone and from the phone to the Mac. Nothing is ever replaced or deleted on either side.
+- Receive with Quick Share: once it is ticked in the menu, the Mac appears in the Android phone's own Quick Share list while both are on the same Wi-Fi. It needs no cable, no USB debugging and nothing installed on the phone. Every share waits for a click on Accept on the Mac, and files are saved to the Downloads folder. It goes from the phone to the Mac only. It works like AirDrop but does not use AirDrop.
+- Privacy: the app has no account, makes no internet connections, and has no analytics or tracking. The website counts page visits anonymously.
+- Mirroring is done by scrcpy (by Genymobile) and adb (from the Android Open Source Project). Both are inside the app, so there is nothing else to install on the Mac.
+- The download is {{size}}. Apple has not checked it, so macOS asks for a one-time confirmation the first time it is opened: System Settings, Privacy & Security, Open Anyway. The download page shows the steps and the file's SHA-256 fingerprint.
+
+## Pages
+
+- [Home]({{site_url}}/): what the app does, with questions and answers
+- [Download]({{site_url}}/download/): the download, what it needs, and the four steps to open it the first time
+- [Set up your phone]({{site_url}}/setup/): how to turn on USB debugging on Samsung, Xiaomi, POCO, Redmi, OnePlus, Oppo, Realme, Pixel and other phones, going wireless, Pocket mode, Quick Share, and quick fixes
+- [Privacy and security]({{site_url}}/security/): what the app does and never does, why macOS warns the first time, how to check the download, and what USB debugging, wireless mode and Quick Share mean

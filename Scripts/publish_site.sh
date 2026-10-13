@@ -14,3 +14,4 @@ rm -rf public
 ditto dist/site public
 echo "public/ is ready: $(find public -type f | wc -l | tr -d ' ') files, $(du -sh public | awk '{print $1}')"
 echo "Next: git add -A && git commit -m \"...\" && git push"
+echo "Then, a minute later: Scripts/tell_search_engines.sh"

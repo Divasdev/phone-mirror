@@ -193,6 +193,13 @@ Scripts/serve_site.sh      # builds the website and shows it at http://localhost
 - The link-preview picture is `website/static/assets/og.png`, made from `website/_og.html` with:
   `"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars
   --window-size=1200,630 --screenshot=website/static/assets/og.png "file://$PWD/website/_og.html"`
+- What search engines and AI assistants read: each page's title and description are the first lines of
+  its file in `website/pages/`. `build.py` also writes, at the end of every page, a description of it in
+  schema.org form (the app, the questions and answers, the guide's steps), and it takes the questions and
+  the steps from the page's own words, so the two cannot drift apart. The same block at the top of a page
+  switches these on (`schema:`, `crumb:`, `howto:`, `robots:`; explained in `build.py`). The build writes
+  `sitemap.xml`, `robots.txt` and `llms.txt` (the app in plain words for AI assistants, from
+  `website/llms.txt`). There is no price and there are no ratings anywhere in it, on purpose.
 
 To check the code without a phone, run `swift test`. The tests use a pretend phone (a small script that answers
 adb's file commands from a temporary folder), so they never touch a real one.
@@ -203,6 +210,8 @@ The site is plain files, so any static host works. This repository is set up for
 1. `Scripts/publish_site.sh` builds the site and copies the finished result into `public/`.
 2. Commit and push. Vercel serves the `public/` folder as it is (`vercel.json` says so: no framework,
    no build step), and updates about a minute after every push.
+3. `Scripts/tell_search_engines.sh` tells Bing and the other IndexNow search engines that the pages
+   changed. Google is not part of that: add the sitemap once in Google Search Console.
 
 The pages load Vercel Web Analytics (`/_vercel/insights/script.js`, in `website/layout.html`), which counts
 visits anonymously once it is switched on in the Vercel dashboard (Analytics → Enable). The app itself
@@ -253,6 +262,7 @@ defaults delete in.phonemirror.app
 | `release.sh` | Builds the download for other people (`dist/Phone-Mirror.dmg`) |
 | `website/` | The website for phonemirror.in: pages, layout, styles, and `build.py` that assembles them |
 | `Scripts/serve_site.sh` | Builds the website and serves it on localhost |
+| `Scripts/tell_search_engines.sh` | After a push: tells Bing and the other IndexNow search engines that the pages changed |
 | `Resources/THIRD-PARTY-NOTICES.txt` | Credits and licences for scrcpy and adb, shipped inside the download |
 | `Tests/PhoneMirrorTests/` | Checks that run on the Mac without a phone (`swift test`) |
 | `Tools/latency_bench.py` | Developer tool: measures latency/jitter of scrcpy settings on a real phone |
