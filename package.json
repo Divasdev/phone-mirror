@@ -1,0 +1,12 @@
+{
+  "name": "phone-mirror-website",
+  "version": "1.0.0",
+  "description": "Phone Mirror website with Vercel Web Analytics",
+  "private": true,
+  "scripts": {
+    "build": "python3 website/build.py"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.1.1"
+  }
+}
