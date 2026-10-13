@@ -295,6 +295,16 @@ private struct Unchecked<Value>: @unchecked Sendable {
 
 // MARK: - Settings
 
+@Test func aBlockedLocalNetworkIsExplainedInPlainWords() {
+    // What adb prints when macOS does not let it reach the phone's address on the Wi-Fi.
+    #expect(FriendlyError.looksBlockedByMacOS("failed to connect to '192.168.0.10:5555': No route to host"))
+    #expect(!FriendlyError.looksBlockedByMacOS("failed to connect to '192.168.0.10:5555': Connection refused"))
+    #expect(!FriendlyError.looksBlockedByMacOS("connected to 192.168.0.10:5555"))
+    let message = FriendlyError.localNetworkBlocked(details: "x")
+    #expect(message.advice.contains("Privacy & Security → Local Network"))
+    #expect(message.details == "x")
+}
+
 @Test func everyMirrorNamesOnePhoneAndConnectsFromTheMac() {
     let basics = MirrorOptions.basics(serial: "abc123")
     #expect(Array(basics.prefix(2)) == ["-s", "abc123"])

@@ -29,6 +29,25 @@ struct FriendlyError {
             details: details)
     }
 
+    /// macOS asks once whether an app may "find devices on your local network". Without that,
+    /// every connection to the phone's Wi-Fi address fails with "No route to host", which says
+    /// nothing useful to a person.
+    static func localNetworkBlocked(details: String = "") -> FriendlyError {
+        FriendlyError(
+            title: "macOS is blocking the connection to your phone.",
+            advice: """
+            Open System Settings → Privacy & Security → Local Network and switch Phone Mirror on. \
+            If it is already on, switch it off and on again. Then click “Go Wireless” once more.
+            The cable still works in the meantime.
+            """,
+            details: details)
+    }
+
+    /// adb's words when macOS refused to let it reach an address on the local network.
+    static func looksBlockedByMacOS(_ adbOutput: String) -> Bool {
+        adbOutput.localizedCaseInsensitiveContains("No route to host")
+    }
+
     static let toolsMissing = FriendlyError(
         title: "scrcpy or adb is missing.",
         advice: """
@@ -63,7 +82,7 @@ struct FriendlyError {
         }
         return FriendlyError(
             title: "Mirroring stopped unexpectedly.",
-            advice: "Try unplugging and replugging the cable, or choose the “Low lag” quality preset. Click “Show Details” to see scrcpy’s message.",
+            advice: "Try unplugging and replugging the cable, or choose “Low latency (Wi-Fi)” under Quality. Click “Show Details” to see scrcpy’s message.",
             details: output)
     }
 

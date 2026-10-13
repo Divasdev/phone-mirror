@@ -42,27 +42,53 @@ extension AppState {
         try? await Task.sleep(for: .seconds(2)) // the phone restarts its adb service
 
         busyMessage = "Connecting to \(ip)…"
-        var lastOutput = ""
-        for _ in 1...5 {
-            let attempt = await adb.connect(ip: ip, port: wirelessPort)
-            lastOutput = attempt.output
-            if attempt.ok {
-                savedIP = ip
-                lastWasHotspot = false
-                await refresh()
-                quality = nil // measure the new link next time the menu opens
-                busyMessage = nil
-                FriendlyError.info("Wireless is ready! 🎉",
-                                   "Connected to your phone at \(ip).\nYou can unplug the USB cable now, then click “Mirror Phone”.\n\nWhen you're done, use “Disconnect Wireless” to switch it off.")
-                return
-            }
-            try? await Task.sleep(for: .seconds(1))
+        var failure = await connectOverWiFi(adb, ip: ip, tries: 5)
+
+        // macOS only lets Phone Mirror's own adb reach devices on the Wi-Fi. If another program
+        // (Android Studio, a Terminal window) started adb before this app did, the app has been
+        // using that one, and macOS answers every connection with "No route to host". Start our
+        // own adb and try once more.
+        if let output = failure, FriendlyError.looksBlockedByMacOS(output) {
+            busyMessage = "Restarting the connection…"
+            _ = await adb.run(["kill-server"])
+            await adb.startServer()
+            try? await Task.sleep(for: .seconds(2))
+            busyMessage = "Connecting to \(ip)…"
+            failure = await connectOverWiFi(adb, ip: ip, tries: 3)
+        }
+
+        guard let failure else {
+            savedIP = ip
+            lastWasHotspot = false
+            await refresh()
+            quality = nil // measure the new link next time the menu opens
+            busyMessage = nil
+            FriendlyError.info("Wireless is ready! 🎉",
+                               "Connected to your phone at \(ip).\nYou can unplug the USB cable now, then click “Mirror Phone”.\n\nWhen you're done, use “Disconnect Wireless” to switch it off.")
+            return
         }
         // Didn't work: switch the phone back to USB-only instead of leaving it listening.
         _ = await adb.run(["-s", usb.serial, "usb"])
-        show(FriendlyError(title: "Couldn’t connect over Wi-Fi.",
-                           advice: "Make sure the Mac and phone are on the same Wi-Fi network (not a guest network), then try again.",
-                           details: lastOutput))
+        if FriendlyError.looksBlockedByMacOS(failure) {
+            show(.localNetworkBlocked(details: failure))
+        } else {
+            show(FriendlyError(title: "Couldn’t connect over Wi-Fi.",
+                               advice: "Make sure the Mac and phone are on the same Wi-Fi network (not a guest network), then try again.",
+                               details: failure))
+        }
+    }
+
+    /// Tries `adb connect` a few times, a second apart. Returns nil when it worked, otherwise
+    /// what adb said last.
+    private func connectOverWiFi(_ adb: ADB, ip: String, tries: Int) async -> String? {
+        var lastOutput = ""
+        for _ in 1...tries {
+            let attempt = await adb.connect(ip: ip, port: wirelessPort)
+            if attempt.ok { return nil }
+            lastOutput = attempt.output
+            try? await Task.sleep(for: .seconds(1))
+        }
+        return lastOutput
     }
 
     // MARK: Hotspot mode (direct phone → Mac link)
