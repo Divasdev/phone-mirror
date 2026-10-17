@@ -240,6 +240,10 @@ a.chip:hover { transform: translateY(-1px); }
 .letter { max-width: 660px; margin: 0 auto; padding: 34px 36px; font-size: 1.08rem; }
 .letter p + p { margin-top: 14px; }
 .letter .sign { margin-top: 18px; font: italic 2.1rem/1 var(--display); color: var(--ink); }
+/* Product Hunt: the badge under the hero's download button, the card under the note */
+.ph-badge { display: inline-block; margin-top: 22px; line-height: 0; }
+.ph-badge img { max-width: 100%; height: auto; }
+.ph-embed { max-width: 500px; margin: 26px auto 0; }
 @media (max-width: 560px) { .letter { padding: 26px 22px; } }
 
 /* Features: a grid of glass tiles, different sizes */
