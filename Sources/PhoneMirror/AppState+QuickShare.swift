@@ -21,7 +21,13 @@ extension AppState {
             MainActor.assumeIsolated { QuickSharePrompts.shared.progress(id, bytes: bytes) }
         }
         quickShare.onFinished = { id, result in
-            MainActor.assumeIsolated { QuickSharePrompts.shared.finished(id, result) }
+            MainActor.assumeIsolated {
+                QuickSharePrompts.shared.finished(id, result)
+                switch result {
+                case .saved, .text, .link: AppState.shared.usage.record(.quickShareReceived)
+                default: break
+                }
+            }
         }
     }
 

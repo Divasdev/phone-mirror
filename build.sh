@@ -29,6 +29,10 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN_PATH" "$APP/Contents/MacOS/$EXECUTABLE"
 cp Resources/Info.plist "$APP/Contents/Info.plist"
+if [ "$INSTALL" = "1" ]; then
+    # This copy is the owner's own: its usage count goes in as test data, not the real numbers.
+    /usr/libexec/PlistBuddy -c "Add :PMUsageCountTestMode bool true" "$APP/Contents/Info.plist"
+fi
 
 if [ "$ENGINE" = "bundled" ]; then
     echo "    Putting the mirroring engine (scrcpy + adb) inside the app…"

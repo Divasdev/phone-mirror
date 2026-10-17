@@ -51,7 +51,7 @@ FEATURES = [
     "Pocket mode: the phone's own screen stays dark while you use it from the Mac",
     "Wireless over home Wi-Fi or the phone's own hotspot",
     "Live frame rate and connection quality in the menu",
-    "No account, no analytics, and the app makes no internet connections",
+    "No account, and the only thing sent is an anonymous usage count once a day, which can be switched off",
 ]
 
 

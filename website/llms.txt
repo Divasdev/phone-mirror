@@ -14,7 +14,7 @@ Facts about version {{version}}, the current one:
 - Pocket mode: the phone's own screen goes dark and the phone stays awake while it is mirrored, so it can stay in a pocket or bag. When mirroring stops, the phone locks itself.
 - Phone Files: drag files and folders from the Mac to the phone and from the phone to the Mac. Nothing is ever replaced or deleted on either side.
 - Receive with Quick Share: once it is ticked in the menu, the Mac appears in the Android phone's own Quick Share list while both are on the same Wi-Fi. It needs no cable, no USB debugging and nothing installed on the phone. Every share waits for a click on Accept on the Mac, and files are saved to the Downloads folder. It goes from the phone to the Mac only. It works like AirDrop but does not use AirDrop.
-- Privacy: the app has no account, makes no internet connections, and has no analytics or tracking. The website counts page visits anonymously.
+- Privacy: the app has no account. Its only internet connection is an anonymous usage count once a day (app version, macOS version, chip type, a random hashed number; nothing about the person, phone, network or files), sent to TelemetryDeck and switched off with one click in the menu. The website counts page visits anonymously.
 - Mirroring is done by scrcpy (by Genymobile) and adb (from the Android Open Source Project). Both are inside the app, so there is nothing else to install on the Mac.
 - The download is {{size}}. Apple has not checked it, so macOS asks for a one-time confirmation the first time it is opened: System Settings, Privacy & Security, Open Anyway. The download page shows the steps and the file's SHA-256 fingerprint.
 

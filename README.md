@@ -2,7 +2,8 @@
 
 A tiny macOS menu bar app that mirrors your Android phone using **scrcpy** + **adb**, with no Terminal needed.
 It can also receive files that the phone sends with **Quick Share**, with no cable and no setup on the phone.
-It uses only Apple frameworks: no third-party packages, no internet connections, no analytics.
+It uses only Apple frameworks: no third-party packages. Its only internet connection is an anonymous usage
+count once a day, which the menu can switch off (see "Usage count" below).
 
 ## Requirements
 - macOS 14+ on Apple Silicon
@@ -220,15 +221,35 @@ The site is plain files, so any static host works. This repository is set up for
    changed. Google is not part of that: add the sitemap once in Google Search Console.
 
 The pages load Vercel Web Analytics (`/_vercel/insights/script.js`, in `website/layout.html`), which counts
-visits anonymously once it is switched on in the Vercel dashboard (Analytics → Enable). The app itself
-has no analytics of any kind.
+visits anonymously once it is switched on in the Vercel dashboard (Analytics → Enable). The app's own
+anonymous usage count is described under "Usage count" below.
 
 The download (`public/download/Phone-Mirror.dmg`) is part of that folder, because it can only be built
 on a Mac. After a new version of the app: `./release.sh`, then `Scripts/publish_site.sh`, then commit
 and push.
 
+## Usage count
+Since version 1.4 the app tells [TelemetryDeck](https://telemetrydeck.com) how many copies are in use, so the
+maker knows whether anyone uses it. At most once a day for each kind of event, one HTTPS request
+(`Sources/PhoneMirror/UsageCount.swift`, Apple frameworks only, no SDK):
+
+- **opened** (`TelemetryDeck.Session.started`): a copy ran that day;
+- **mirrored** / **Quick Share received**: that feature was used that day (no count, no file names or sizes);
+- **new install** (`TelemetryDeck.Acquisition.newInstallDetected`): once per Mac.
+
+Each carries only the app version and build, the macOS version and the chip type, under a random number made
+on the Mac and hashed with SHA-256 before it is sent. Nothing about the person, phone, network, screen or files.
+A request that fails is tried again later (at the next launch, or within an hour), never in a loop.
+"Send anonymous usage count" in the menu switches it off and deletes the random number.
+
+- The app ID goes in `Resources/Info.plist` (`PMUsageCountAppID`). Empty: nothing is ever sent.
+- `./build.sh` marks the copy it installs on this Mac as test data (`PMUsageCountTestMode`), so the owner's own
+  use stays out of the real numbers. `./release.sh` builds the public download without that mark.
+- The numbers: sign in at [dashboard.telemetrydeck.com](https://dashboard.telemetrydeck.com) and open the app.
+  To see the owner's own copy, switch the dashboard to Test Mode.
+
 ## Updating
-There is no updater, on purpose: the app makes no internet requests. The menu shows the version of the copy
+There is no updater, on purpose. The menu shows the version of the copy
 that is running, and **Check for Updates…** opens the website's download page in the browser, where the
 newest version number is. To update: quit Phone Mirror, download again, drag into Applications, Replace.
 Settings are kept. Because the download is not notarized, macOS asks for "Open Anyway" once more.
@@ -271,6 +292,7 @@ defaults delete in.phonemirror.app
 | `Sources/PhoneMirror/QuickShareWindow.swift` | Quick Share: the accept / progress / result card |
 | `Sources/PhoneMirror/AppState+QuickShare.swift` | Quick Share: the switch in the menu |
 | `Sources/PhoneMirror/Validation.swift` | Private-LAN IP, port, serial, encoder-name and phone-path checks |
+| `Sources/PhoneMirror/UsageCount.swift` | The anonymous usage count (once a day, can be switched off) |
 | `Sources/PhoneMirror/FriendlyError.swift` | Plain-English error alerts and "Show Details" |
 | `Scripts/make_icon.swift` | Draws the app icon |
 | `Scripts/fetch_engine.sh` | Downloads the official scrcpy release and checks its fingerprint |
@@ -342,8 +364,8 @@ python3 Tools/latency_bench.py -s <serial or ip:5555> --only cbr4,cbr4_800 --rep
   are refused. The built-in adb keeps Google's own signature.
 - Every IP (saved address, hotspot router, ping target) must be a private LAN address (10.x, 172.16–31.x,
   192.168.x); port 5555 or 1024–65535.
-- The app makes no internet requests. The only network traffic it starts itself is a short ping to the phone
-  while the menu is open. Wi-Fi band and router address are read locally from macOS; network names are never
+- Its only internet request is the anonymous usage count (below). Other than that, the only network traffic
+  it starts itself is a short ping to the phone while the menu is open. Wi-Fi band and router address are read locally from macOS; network names are never
   read.
 - It opens a network port in one case only: while **Receive with Quick Share** is ticked (off by default).
   Then it announces the Mac's name on the local network and listens on one port. Only devices on the same

@@ -30,7 +30,8 @@ final class AppState: ObservableObject {
     @Published var macRouterIP: String?          // the Mac's Wi-Fi router (= phone on hotspot)
     @Published var quickShareStatus = QuickShareReceiver.Status.off
 
-    // MARK: Saved settings (UserDefaults: only the phone IP and UI choices)
+    // MARK: Saved settings (UserDefaults: the phone IP, UI choices and, since 1.4, the usage
+    // count's random number and the days it last sent something; see UsageCount.swift)
 
     let defaults = UserDefaults.standard
 
@@ -62,6 +63,10 @@ final class AppState: ObservableObject {
             applyQuickShare()
         }
     }
+    /// "Send anonymous usage count": on until the person switches it off.
+    @Published var usageCountOn: Bool {
+        didSet { usage.isOn = usageCountOn }
+    }
 
     /// Last known phone IP on the home Wi-Fi (validated before saving AND before using).
     var savedIP: String? {
@@ -90,8 +95,11 @@ final class AppState: ObservableObject {
     let scrcpyURL: URL?
     let scrcpy = ScrcpyRunner()
     let quickShare = QuickShareReceiver()
+    let usage = UsageCount()
     var mirroredSerial: String?
     private var refreshTimer: Timer?
+    /// Checks once an hour whether today's "opened" count still has to go (the app often runs for days).
+    private var usageTimer: Timer?
 
     /// Hardware encoder found per phone model (memory only; nil = none found).
     private var encoderCache: [String: String?] = [:]
@@ -130,6 +138,7 @@ final class AppState: ObservableObject {
         showFPS = defaults.bool(forKey: "showFPS")
         autoDisableWirelessOnQuit = defaults.object(forKey: "autoDisableWirelessOnQuit") as? Bool ?? true
         quickShareOn = defaults.bool(forKey: "quickShareReceive")
+        usageCountOn = usage.isOn
     }
 
     // MARK: Derived values for the menu
@@ -199,6 +208,16 @@ final class AppState: ObservableObject {
         }
         connectQuickShare()
         applyQuickShare()
+
+        // The anonymous usage count: now, then once an hour in case the day has changed.
+        usage.appStarted()
+        let usageTimer = Timer(timeInterval: 3600, repeats: true) { _ in
+            Task { @MainActor in AppState.shared.usage.record(.opened) }
+        }
+        usageTimer.tolerance = 600
+        RunLoop.main.add(usageTimer, forMode: .common)
+        self.usageTimer = usageTimer
+
         // New here? Show the three setup steps once.
         if isFirstLaunch { showSetup() }
     }
@@ -369,6 +388,7 @@ final class AppState: ObservableObject {
             lastError = nil
             currentLaunch = (settings, target, !safeMode && settings.usesEncoderTweaks(hardwareEncoder: encoder), Date())
             startPocketGuard(for: target)
+            usage.record(.mirrored)
         } catch {
             show(FriendlyError(title: "Couldn't start scrcpy.",
                                advice: "Try reinstalling it with: brew reinstall scrcpy",
@@ -471,8 +491,8 @@ final class AppState: ObservableObject {
     /// Where the newest version can be downloaded.
     static let downloadPage = URL(string: "https://www.phonemirror.in/download/")!
 
-    /// Opens the website's download page in the browser. The app itself still makes no internet
-    /// request; updating is done by hand: download, drag to Applications, Replace.
+    /// Opens the website's download page in the browser. There is no updater; updating is done
+    /// by hand: download, drag to Applications, Replace.
     func openDownloadPage() {
         NSWorkspace.shared.open(Self.downloadPage)
     }

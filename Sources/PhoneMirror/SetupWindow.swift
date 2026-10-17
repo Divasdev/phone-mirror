@@ -169,6 +169,9 @@ struct SetupView: View {
             Text("Only want to send files from the phone to this Mac? Tick “Receive with Quick Share” in the menu. That needs none of these steps: no cable and no USB debugging.")
                 .font(.callout)
                 .foregroundStyle(.secondary)
+            Text("Once a day Phone Mirror sends an anonymous count, so I know how many people use it: the app and macOS version, nothing about you, your phone or your files. To stop it, untick “Send anonymous usage count” in the menu.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
         }
         .padding(22)
         .frame(width: 540)

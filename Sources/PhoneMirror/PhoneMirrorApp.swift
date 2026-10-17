@@ -146,6 +146,8 @@ struct MenuContent: View {
         Toggle("Launch at login", isOn: Binding(
             get: { state.launchAtLogin },
             set: { state.setLaunchAtLogin($0) }))
+        // Once a day: "a copy of Phone Mirror was used", the app and macOS version. See UsageCount.swift.
+        Toggle("Send anonymous usage count", isOn: $state.usageCountOn)
 
         Divider()
 
@@ -157,8 +159,8 @@ struct MenuContent: View {
 
         Divider()
 
-        // The app never goes online by itself, so it can't know about a newer version. This opens
-        // the download page in the browser, where the newest version number is shown.
+        // There is no updater, so the app doesn't know about a newer version. This opens the
+        // download page in the browser, where the newest version number is shown.
         Text("Phone Mirror \(AppState.appVersion)")
         Button("Check for Updates…") { state.openDownloadPage() }
 
